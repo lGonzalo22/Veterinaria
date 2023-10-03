@@ -5,8 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import org.mariadb.jdbc.Statement;
 
@@ -85,4 +84,84 @@ public class ClienteData {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cliente.");
         }
     }
+    
+    public Cliente buscarClientePorId(int id){
+        Cliente cliente = new Cliente();
+        String sql = "SELECT * FROM cliente WHERE idCliente = ?";
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                cliente.setIdCliente(id);
+                cliente.setDocumento(rs.getInt("documento"));
+                cliente.setCabezaDeFamilia(rs.getString("CabezaDeFamilia"));
+                cliente.setDireccion(rs.getString("direccion"));
+                cliente.setTelefono(rs.getInt("telefono"));
+                cliente.setPersonaAlternativa(rs.getString("personaAlternativa"));
+                cliente.setEstado(rs.getBoolean("estado"));
+            }else{
+                JOptionPane.showMessageDialog(null, "El cliente no existe.");
+            }
+            ps.close();
+        } catch (SQLException ex) {
+             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cliente.");
+        }
+        return cliente;
+    }
+    
+        public Cliente buscarClientePorDni(int documento){
+        Cliente cliente = new Cliente();
+        String sql = "SELECT * FROM cliente WHERE documento = ?";
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, documento);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                cliente.setIdCliente(rs.getInt("idCliente"));
+                cliente.setDocumento(documento);
+                cliente.setCabezaDeFamilia(rs.getString("CabezaDeFamilia"));
+                cliente.setDireccion(rs.getString("direccion"));
+                cliente.setTelefono(rs.getInt("telefono"));
+                cliente.setPersonaAlternativa(rs.getString("personaAlternativa"));
+                cliente.setEstado(rs.getBoolean("estado"));
+            }else{
+                JOptionPane.showMessageDialog(null, "El cliente no existe.");
+            }
+            ps.close();
+        } catch (SQLException ex) {
+             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cliente.");
+        }
+        return cliente;
+    }
+    
+        public ArrayList<Cliente> listarClientes(){
+            
+            ArrayList<Cliente> clientes = new ArrayList();
+            String sql = "SELECT * FROM cliente WHERE estado = 1";
+            
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Cliente cliente = new Cliente();
+                cliente.setIdCliente(rs.getInt("idCliente"));
+                cliente.setDocumento(rs.getInt("documento"));
+                cliente.setCabezaDeFamilia(rs.getString("CabezaDeFamilia"));
+                cliente.setDireccion(rs.getString("direccion"));
+                cliente.setTelefono(rs.getInt("telefono"));
+                cliente.setPersonaAlternativa(rs.getString("personaAlternativa"));
+                cliente.setEstado(rs.getBoolean("estado"));
+                clientes.add(cliente);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cliente.");
+        }
+            
+            return clientes;
+        }
+    
 }

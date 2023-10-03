@@ -13,8 +13,9 @@ public class Mascota {
     private LocalDate fechaNac;
     private double pesoMedio;
     private double pesoActual;
+    private boolean estado;
 
-    public Mascota(int idMascota, String nombre, String sexo, String especie, String raza, String colorPelo, LocalDate fechaNac, double pesoMedio, double pesoActual) {
+    public Mascota(int idMascota, String nombre, String sexo, String especie, String raza, String colorPelo, LocalDate fechaNac, double pesoMedio, double pesoActual, boolean estado) {
         this.idMascota = idMascota;
         this.nombre = nombre;
         this.sexo = sexo;
@@ -24,9 +25,10 @@ public class Mascota {
         this.fechaNac = fechaNac;
         this.pesoMedio = pesoMedio;
         this.pesoActual = pesoActual;
+        this.estado = estado;
     }
 
-        public Mascota(String nombre, String sexo, String especie, String raza, String colorPelo, LocalDate fechaNac, double pesoMedio, double pesoActual) {
+        public Mascota(String nombre, String sexo, String especie, String raza, String colorPelo, LocalDate fechaNac, double pesoMedio, double pesoActual, boolean estado) {
         this.nombre = nombre;
         this.sexo = sexo;
         this.especie = especie;
@@ -35,6 +37,7 @@ public class Mascota {
         this.fechaNac = fechaNac;
         this.pesoMedio = pesoMedio;
         this.pesoActual = pesoActual;
+        this.estado = estado;
     }
     
     public Mascota() {
@@ -112,9 +115,17 @@ public class Mascota {
         this.pesoActual = pesoActual;
     }
 
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+    
     @Override
     public String toString() {
-        return "Mascota{" + "idMascota=" + idMascota + ", nombre=" + nombre + ", sexo=" + sexo + ", especie=" + especie + ", raza=" + raza + ", colorPelo=" + colorPelo + ", fechaNac=" + fechaNac + ", pesoMedio=" + pesoMedio + ", pesoActual=" + pesoActual + '}';
+        return "Mascota{" + "idMascota=" + idMascota + ", nombre=" + nombre + ", sexo=" + sexo + ", especie=" + especie + ", raza=" + raza + ", colorPelo=" + colorPelo + ", fechaNac=" + fechaNac + ", pesoMedio=" + pesoMedio + ", pesoActual=" + pesoActual + '}'+"\n";
     }
     
     

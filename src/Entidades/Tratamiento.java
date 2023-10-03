@@ -3,12 +3,12 @@ package Entidades;
 public class Tratamiento {
     
     private int idTratamiento;
-    private String tipo;
+    private TiposTratamientos tipo;
     private String descripcion;
     private double importe;
     private boolean estado;
 
-    public Tratamiento(int idTratamiento, String tipo, String descripcion, double importe, boolean estado) {
+    public Tratamiento(int idTratamiento, TiposTratamientos tipo, String descripcion, double importe, boolean estado) {
         this.idTratamiento = idTratamiento;
         this.tipo = tipo;
         this.descripcion = descripcion;
@@ -16,7 +16,7 @@ public class Tratamiento {
         this.estado = estado;
     }
 
-        public Tratamiento(String tipo, String descripcion, double importe, boolean estado) {
+        public Tratamiento(TiposTratamientos tipo, String descripcion, double importe, boolean estado) {
         this.tipo = tipo;
         this.descripcion = descripcion;
         this.importe = importe;
@@ -34,13 +34,15 @@ public class Tratamiento {
         this.idTratamiento = idTratamiento;
     }
 
-    public String getTipo() {
+    public TiposTratamientos getTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(TiposTratamientos tipo) {
         this.tipo = tipo;
     }
+
+    
 
     public String getDescripcion() {
         return descripcion;
