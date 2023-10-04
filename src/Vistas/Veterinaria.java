@@ -3,17 +3,19 @@ package Vistas;
 import AccesoADatos.ClienteData;
 import AccesoADatos.MascotaData;
 import AccesoADatos.TratamientoData;
+import AccesoADatos.VisitaData;
 import Entidades.Cliente;
 import Entidades.Mascota;
 import Entidades.TiposTratamientos;
 import Entidades.Tratamiento;
+import Entidades.Visita;
 import java.time.LocalDate;
 
 public class Veterinaria {
 
     public static void main(String[] args) {
         
-        Cliente cliente = new Cliente(9,5324, "qwe", "sad", 134123, "Pipim",true);
+        Cliente cliente = new Cliente(1,12345, "Golum", "Peron 534", 12135132, "Smeagol",true);
         ClienteData clienData = new ClienteData();
         
         //clienData.agregarCliente(cliente);
@@ -35,9 +37,18 @@ public class Veterinaria {
         //System.out.println(mascData.buscarMascota(1));
         //System.out.println(mascData.listarMascota());
         
-        Tratamiento tratamiento = new Tratamiento(TiposTratamientos.BAÑOYCORTE, "Baño", 2000, true);
+        Tratamiento tratamiento = new Tratamiento(4, TiposTratamientos.CURACIONES, "Control de rutina", 5000, true);
         TratamientoData tratData = new TratamientoData();
-        tratData.agregarTratamiento(tratamiento);
+        //tratData.agregarTratamiento(tratamiento);
+        //tratData.eliminarTratamiento(1);
+        //tratData.modificarTratamiento(tratamiento);
+        //System.out.println(tratData.buscarTratamiento(1));
+        //System.out.println(tratData.listarTratamientoPorTipo(TiposTratamientos.BAÑOYCORTE));
+        //System.out.println(tratData.listarTratamiento());
+        
+        
+        Visita visita = new Visita(cliente, mascota, tratamiento, LocalDate.of(0, 0, 0));
+        VisitaData visData = new VisitaData();
+        visData.agregarVisita(visita);
     }
-    
 }
