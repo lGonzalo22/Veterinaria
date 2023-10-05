@@ -8,20 +8,23 @@ public class Visita {
     private Cliente cliente;
     private Mascota mascota;
     private Tratamiento tratamiento;
+    private double pesoActual;
     private LocalDate fechaVisita;
 
-    public Visita(int idVisita, Cliente cliente, Mascota mascota, Tratamiento tratamiento, LocalDate fechaVisita) {
+    public Visita(int idVisita, Cliente cliente, Mascota mascota, Tratamiento tratamiento, double pesoActual, LocalDate fechaVisita) {
         this.idVisita = idVisita;
         this.cliente = cliente;
         this.mascota = mascota;
         this.tratamiento = tratamiento;
+        this.pesoActual = pesoActual;
         this.fechaVisita = fechaVisita;
     }
 
-        public Visita(Cliente cliente, Mascota mascota, Tratamiento tratamiento, LocalDate fechaVisita) {
+        public Visita(Cliente cliente, Mascota mascota, Tratamiento tratamiento, double pesoActual, LocalDate fechaVisita) {
         this.cliente = cliente;
         this.mascota = mascota;
         this.tratamiento = tratamiento;
+        this.pesoActual = pesoActual;
         this.fechaVisita = fechaVisita;
     }
     
@@ -58,6 +61,14 @@ public class Visita {
 
     public void setTratamiento(Tratamiento tratamiento) {
         this.tratamiento = tratamiento;
+    }
+
+    public double getPesoActual() {
+        return pesoActual;
+    }
+
+    public void setPesoActual(double pesoActual) {
+        this.pesoActual = pesoActual;
     }
 
     public LocalDate getFechaVisita() {

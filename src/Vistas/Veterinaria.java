@@ -14,8 +14,8 @@ import java.time.LocalDate;
 public class Veterinaria {
 
     public static void main(String[] args) {
-        
-        Cliente cliente = new Cliente(1,12345, "Golum", "Peron 534", 12135132, "Smeagol",true);
+
+        Cliente cliente = new Cliente(2,43121, "Gandalf", "Mitre 243", 65342312, "Gimly",true);
         ClienteData clienData = new ClienteData();
         
         //clienData.agregarCliente(cliente);
@@ -28,7 +28,7 @@ public class Veterinaria {
         
         //System.out.println(clienData.listarClientes());
         
-        Mascota mascota = new Mascota(4,"Martin", "masculino", "loro", "cacique", "verde", LocalDate.of(2020, 4, 5), 0.5, 0.8, true);
+        //Mascota mascota = new Mascota(5,"Yago", "masculino", "perro", "golden", "negro", LocalDate.of(2010, 5, 25), 50, 52, true);
         MascotaData mascData = new MascotaData();
         
         //mascData.agregarMascota(mascota);
@@ -37,7 +37,7 @@ public class Veterinaria {
         //System.out.println(mascData.buscarMascota(1));
         //System.out.println(mascData.listarMascota());
         
-        Tratamiento tratamiento = new Tratamiento(4, TiposTratamientos.CURACIONES, "Control de rutina", 5000, true);
+        Tratamiento tratamiento = new Tratamiento(10,TiposTratamientos.CONTROL, "Segundo control posterior a la cirugia", 2000, true);
         TratamientoData tratData = new TratamientoData();
         //tratData.agregarTratamiento(tratamiento);
         //tratData.eliminarTratamiento(1);
@@ -47,8 +47,8 @@ public class Veterinaria {
         //System.out.println(tratData.listarTratamiento());
         
         
-        Visita visita = new Visita(cliente, mascota, tratamiento, LocalDate.of(0, 0, 0));
+        //Visita visita = new Visita(cliente, mascota, tratamiento, 49.5, LocalDate.of(2023, 10, 3));
         VisitaData visData = new VisitaData();
-        visData.agregarVisita(visita);
+        //visData.agregarVisita(visita);
     }
 }

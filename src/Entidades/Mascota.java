@@ -5,6 +5,7 @@ import java.time.LocalDate;
 public class Mascota {
     
     private int idMascota;
+    private Cliente cliente;
     private String nombre;
     private String sexo;
     private String especie;
@@ -15,8 +16,9 @@ public class Mascota {
     private double pesoActual;
     private boolean estado;
 
-    public Mascota(int idMascota, String nombre, String sexo, String especie, String raza, String colorPelo, LocalDate fechaNac, double pesoMedio, double pesoActual, boolean estado) {
+    public Mascota(int idMascota, Cliente cliente, String nombre, String sexo, String especie, String raza, String colorPelo, LocalDate fechaNac, double pesoMedio, double pesoActual, boolean estado) {
         this.idMascota = idMascota;
+        this.cliente = cliente;
         this.nombre = nombre;
         this.sexo = sexo;
         this.especie = especie;
@@ -28,7 +30,8 @@ public class Mascota {
         this.estado = estado;
     }
 
-        public Mascota(String nombre, String sexo, String especie, String raza, String colorPelo, LocalDate fechaNac, double pesoMedio, double pesoActual, boolean estado) {
+        public Mascota(Cliente cliente,String nombre, String sexo, String especie, String raza, String colorPelo, LocalDate fechaNac, double pesoMedio, double pesoActual, boolean estado) {
+        this.cliente = cliente;
         this.nombre = nombre;
         this.sexo = sexo;
         this.especie = especie;
@@ -51,6 +54,15 @@ public class Mascota {
         this.idMascota = idMascota;
     }
 
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    
     public String getNombre() {
         return nombre;
     }
@@ -122,12 +134,9 @@ public class Mascota {
     public void setEstado(boolean estado) {
         this.estado = estado;
     }
-    
+
     @Override
     public String toString() {
-        return "Mascota{" + "idMascota=" + idMascota + ", nombre=" + nombre + ", sexo=" + sexo + ", especie=" + especie + ", raza=" + raza + ", colorPelo=" + colorPelo + ", fechaNac=" + fechaNac + ", pesoMedio=" + pesoMedio + ", pesoActual=" + pesoActual + '}'+"\n";
-    }
-    
-    
-    
+        return "Mascota{" + "idMascota=" + idMascota + ", cliente=" + cliente + ", nombre=" + nombre + ", sexo=" + sexo + ", especie=" + especie + ", raza=" + raza + ", colorPelo=" + colorPelo + ", fechaNac=" + fechaNac + ", pesoMedio=" + pesoMedio + ", pesoActual=" + pesoActual + ", estado=" + estado + '}';
+    }    
 }

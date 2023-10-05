@@ -1,5 +1,6 @@
 package AccesoADatos;
 
+import Entidades.Cliente;
 import Entidades.Mascota;
 import java.sql.Connection;
 import java.sql.Date;
@@ -22,19 +23,20 @@ public class MascotaData {
 
     public void agregarMascota(Mascota mascota) {
 
-        String sql = "INSERT INTO mascota(nombre, sexo, especie, raza, colorPelo, fechaNac, pesoMedio, pesoActual, estado) "
-                + "VALUES (?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO mascota(idCliente, nombre, sexo, especie, raza, colorPelo, fechaNac, pesoMedio, pesoActual, estado) "
+                + "VALUES (?,?,?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, mascota.getNombre());
-            ps.setString(2, mascota.getSexo());
-            ps.setString(3, mascota.getEspecie());
-            ps.setString(4, mascota.getRaza());
-            ps.setString(5, mascota.getColorPelo());
-            ps.setDate(6, Date.valueOf(mascota.getFechaNac()));
-            ps.setDouble(7, mascota.getPesoMedio());
-            ps.setDouble(8, mascota.getPesoActual());
-            ps.setBoolean(9, mascota.isEstado());
+            ps.setInt(1, mascota.getCliente().getIdCliente());
+            ps.setString(2, mascota.getNombre());
+            ps.setString(3, mascota.getSexo());
+            ps.setString(4, mascota.getEspecie());
+            ps.setString(5, mascota.getRaza());
+            ps.setString(6, mascota.getColorPelo());
+            ps.setDate(7, Date.valueOf(mascota.getFechaNac()));
+            ps.setDouble(8, mascota.getPesoMedio());
+            ps.setDouble(9, mascota.getPesoActual());
+            ps.setBoolean(10, mascota.isEstado());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
@@ -48,6 +50,13 @@ public class MascotaData {
             JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
         }
     }
+    
+    public void agregarMascotaPorCliente(int id){
+        
+            String sql = "INSERT INTO mascota(idCliente, nombre, sexo, especie, raza, colorPelo, fechaNac, pesoMedio, pesoActual, estado)"
+                    + "VALUES (?,?,?,?,?,?,?,?,?,?)";
+    }
+    
 
     public void eliminarMascota(int id) {
 
@@ -69,10 +78,11 @@ public class MascotaData {
     }
 
     public void modificarMascota(Mascota mascota) {
-        String sql = "UPDATE mascota SET nombre = ?, sexo = ?, especie = ?, raza = ?, colorPelo = ?, fechaNac = ?, pesoMedio = ?, pesoActual = ?, estado = ? WHERE idMascota = ?";
+        String sql = "UPDATE mascota SET idCliente = ?, nombre = ?, sexo = ?, especie = ?, raza = ?, colorPelo = ?, fechaNac = ?, pesoMedio = ?, pesoActual = ?, estado = ? WHERE idMascota = ?";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
+            //idcliente
             ps.setString(1, mascota.getNombre());
             ps.setString(2, mascota.getSexo());
             ps.setString(3, mascota.getEspecie());
