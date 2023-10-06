@@ -47,43 +47,89 @@ public class VisitaData {
             JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
         }
     }
-    
-    public double pesoPromedio(Visita visita){
-        
-        
+
+    public double pesoPromedio(Visita visita) {
+
         String sql = "SELECT pesoActual FROM visita WHERE idMascota = " + visita.getMascota().getIdMascota();
-        
+
         int cantidadVisita = 0;
+        int visitaTotales = 0;
+        int diferencia = 0;
         double pesoPromedio = 0;
         double sumaPesoActual = 0;
-        double pesoActual = 0;
+        double pesoActualBaseDatos = 0;
+        double pesoRestarBaseDatos = 0;
+        double sumaDifencia = 0;
+        int cantidadDif = 0;
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
+
             while (rs.next()) {
-                pesoActual = rs.getDouble("pesoActual");
+
+                pesoActualBaseDatos = rs.getDouble("pesoActual");
                 cantidadVisita++;
-                sumaPesoActual = sumaPesoActual + pesoActual;
-                System.out.println(sumaPesoActual);
+                if (cantidadVisita > 9) {
+                    diferencia++;
+                }
+                sumaPesoActual = sumaPesoActual + pesoActualBaseDatos;
+                System.out.println("Peso Actual: " + pesoActualBaseDatos);
+
             }
-            pesoPromedio = sumaPesoActual/cantidadVisita;
-            
+            while (rs.next()) {
+                if (diferencia != 0) {
+                    pesoRestarBaseDatos = rs.getDouble("pesoActual");
+                    sumaDifencia = sumaDifencia + pesoRestarBaseDatos;
+                    cantidadDif++;
+                    System.out.println(cantidadDif);
+                    if (cantidadDif == diferencia) {
+                        break;
+                    }
+                }
+            }
+
+            //List<Double> pesoActualList = new ArrayList<>();
+            //
+            //while (rs.next()) {
+            //    double pesoActualBaseDatos = rs.getDouble("pesoActual");
+            //    cantidadVisita++;
+            //    if (cantidadVisita > 9) {
+            //        diferencia++;
+            //    }
+            //    sumaPesoActual += pesoActualBaseDatos;
+            //    System.out.println("Peso Actual: " + pesoActualBaseDatos);
+            //    pesoActualList.add(pesoActualBaseDatos);
+            //}
+            //
+            //for (int i = 0; i < diferencia; i++) {
+            //    if (!pesoActualList.isEmpty()) {
+            //        double pesoRestarBaseDatos = pesoActualList.remove(pesoActualList.size() - 1);
+            //        sumaDiferencia += pesoRestarBaseDatos;
+            //        cantidadDif++;
+            //        System.out.println(cantidadDif);
+            //    }
+            //}
+            sumaPesoActual = (sumaPesoActual + visita.getPesoActual()) - sumaDifencia;
+            cantidadVisita = cantidadVisita - diferencia;
+            pesoPromedio = sumaPesoActual / cantidadVisita;
+            System.out.println("SumaPesoActual: " + sumaPesoActual);
+            System.out.println("Suma difencia: " + sumaDifencia);
+            System.out.println("Peso promedio: " + pesoPromedio);
+
             String sql2 = "UPDATE mascota SET pesoMedio = " + pesoPromedio + "WHERE idMascota = " + visita.getMascota().getIdMascota();
             PreparedStatement ps2 = con.prepareStatement(sql2);
             int correcto = ps2.executeUpdate();
             if (correcto == 1) {
                 JOptionPane.showMessageDialog(null, "Peso medio modificado con exito.");
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(null, "La mascota no existe.");
             }
-            
+
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
         }
-        
+
         return pesoPromedio;
     }
-    
-    
-    
+
 }

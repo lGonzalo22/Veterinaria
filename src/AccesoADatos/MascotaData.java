@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 public class MascotaData {
 
     private Connection con = null;
+    private ClienteData clienteData = new ClienteData();
 
     public MascotaData() {
         this.con = Conexion.getConexion();
@@ -82,17 +83,17 @@ public class MascotaData {
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            //idcliente
-            ps.setString(1, mascota.getNombre());
-            ps.setString(2, mascota.getSexo());
-            ps.setString(3, mascota.getEspecie());
-            ps.setString(4, mascota.getRaza());
-            ps.setString(5, mascota.getColorPelo());
-            ps.setDate(6, Date.valueOf(mascota.getFechaNac()));
-            ps.setDouble(7, mascota.getPesoMedio());
-            ps.setDouble(8, mascota.getPesoActual());
-            ps.setBoolean(9, mascota.isEstado());
-            ps.setInt(10, mascota.getIdMascota());
+            ps.setInt(1, mascota.getCliente().getIdCliente());
+            ps.setString(2, mascota.getNombre());
+            ps.setString(3, mascota.getSexo());
+            ps.setString(4, mascota.getEspecie());
+            ps.setString(5, mascota.getRaza());
+            ps.setString(6, mascota.getColorPelo());
+            ps.setDate(7, Date.valueOf(mascota.getFechaNac()));
+            ps.setDouble(8, mascota.getPesoMedio());
+            ps.setDouble(9, mascota.getPesoActual());
+            ps.setBoolean(10, mascota.isEstado());
+            ps.setInt(11, mascota.getIdMascota());
             int correcto = ps.executeUpdate();
             if (correcto == 1) {
                 JOptionPane.showMessageDialog(null, "Mascota actualizada con exito.");
@@ -116,6 +117,8 @@ public class MascotaData {
             if (rs.next()) {
                 mascota = new Mascota();
                 mascota.setIdMascota(id);
+                Cliente cliente = clienteData.buscarClientePorId(rs.getInt("idCliente"));
+                mascota.setCliente(cliente);
                 mascota.setNombre(rs.getString("nombre"));
                 mascota.setSexo(rs.getString("sexo"));
                 mascota.setEspecie(rs.getString("especie"));
@@ -148,6 +151,7 @@ public class MascotaData {
             while (rs.next()) {
                 Mascota mascota = new Mascota();
                 mascota.setIdMascota(rs.getInt("idMascota"));
+                mascota.setCliente(clienteData.buscarClientePorId(rs.getInt("idCliente")));
                 mascota.setNombre(rs.getString("nombre"));
                 mascota.setSexo(rs.getString("sexo"));
                 mascota.setEspecie(rs.getString("especie"));
@@ -164,12 +168,5 @@ public class MascotaData {
             JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
         }
         return mascotas;
-    }
-    
-    public double pesoPromedio(Mascota mascota){
-        
-        double promedio = mascota.getPesoMedio() / mascota.getPesoActual();
-        
-        return promedio;
     }
 }

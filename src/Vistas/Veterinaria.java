@@ -28,16 +28,16 @@ public class Veterinaria {
         
         //System.out.println(clienData.listarClientes());
         
-        //Mascota mascota = new Mascota(5,"Yago", "masculino", "perro", "golden", "negro", LocalDate.of(2010, 5, 25), 50, 52, true);
+        Mascota mascota = new Mascota(5,cliente,"Yago", "masculino", "perro", "golden", "negro", LocalDate.of(2010, 5, 25), 48.375, 52, true);
         MascotaData mascData = new MascotaData();
         
         //mascData.agregarMascota(mascota);
-        //mascData.eliminarMascota(4);
+        //mascData.eliminarMascota(3);
         //mascData.modificarMascota(mascota);
-        //System.out.println(mascData.buscarMascota(1));
+        //System.out.println(mascData.buscarMascota(3));
         //System.out.println(mascData.listarMascota());
         
-        Tratamiento tratamiento = new Tratamiento(10,TiposTratamientos.CONTROL, "Segundo control posterior a la cirugia", 2000, true);
+        Tratamiento tratamiento = new Tratamiento(18,TiposTratamientos.CONTROL, "Decimo control posterior a la cirugia", 3500, true);
         TratamientoData tratData = new TratamientoData();
         //tratData.agregarTratamiento(tratamiento);
         //tratData.eliminarTratamiento(1);
@@ -47,8 +47,8 @@ public class Veterinaria {
         //System.out.println(tratData.listarTratamiento());
         
         
-        //Visita visita = new Visita(cliente, mascota, tratamiento, 49.5, LocalDate.of(2023, 10, 3));
+        Visita visita = new Visita(cliente, mascota, tratamiento, 51.7, LocalDate.of(2023, 10, 3));
         VisitaData visData = new VisitaData();
-        //visData.agregarVisita(visita);
+        visData.agregarVisita(visita);
     }
 }
