@@ -32,12 +32,14 @@ public class Veterinaria {
         MascotaData mascData = new MascotaData();
         
         //mascData.agregarMascota(mascota);
+        
         //mascData.eliminarMascota(3);
         //mascData.modificarMascota(mascota);
         //System.out.println(mascData.buscarMascota(3));
         //System.out.println(mascData.listarMascota());
+        //System.out.println(mascData.listarMascotaPorCliente(1));
         
-        Tratamiento tratamiento = new Tratamiento(18,TiposTratamientos.CONTROL, "Decimo control posterior a la cirugia", 3500, true);
+        Tratamiento tratamiento = new Tratamiento(19,TiposTratamientos.CONTROL, "Undecimo control posterior a la cirugia", 3500, true);
         TratamientoData tratData = new TratamientoData();
         //tratData.agregarTratamiento(tratamiento);
         //tratData.eliminarTratamiento(1);
@@ -47,8 +49,11 @@ public class Veterinaria {
         //System.out.println(tratData.listarTratamiento());
         
         
-        Visita visita = new Visita(cliente, mascota, tratamiento, 51.7, LocalDate.of(2023, 10, 3));
+        Visita visita = new Visita(46,cliente, mascota, tratamiento, 53.5, LocalDate.of(2023, 10, 3));
         VisitaData visData = new VisitaData();
-        visData.agregarVisita(visita);
+        //visData.agregarVisita(visita);
+        //visData.modificarVisita(visita);
+        //System.out.println(visData.listarVisitasPorMascota(5));
+        //System.out.println(visData.listarVisitasPorTipoTratamiento(TiposTratamientos.CONTROL));
     }
 }

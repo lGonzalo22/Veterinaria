@@ -51,13 +51,6 @@ public class MascotaData {
             JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
         }
     }
-    
-    public void agregarMascotaPorCliente(int id){
-        
-            String sql = "INSERT INTO mascota(idCliente, nombre, sexo, especie, raza, colorPelo, fechaNac, pesoMedio, pesoActual, estado)"
-                    + "VALUES (?,?,?,?,?,?,?,?,?,?)";
-    }
-    
 
     public void eliminarMascota(int id) {
 
@@ -141,13 +134,13 @@ public class MascotaData {
     public ArrayList<Mascota> listarMascota() {
 
         ArrayList<Mascota> mascotas = new ArrayList();
-        
+
         String sql = "SELECT * FROM mascota WHERE estado = 1";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            
+
             while (rs.next()) {
                 Mascota mascota = new Mascota();
                 mascota.setIdMascota(rs.getInt("idMascota"));
@@ -169,4 +162,39 @@ public class MascotaData {
         }
         return mascotas;
     }
+    
+    
+        public ArrayList<Mascota> listarMascotaPorCliente(int id) {
+
+        ArrayList<Mascota> mascotas = new ArrayList();
+
+        String sql = "SELECT * FROM mascota WHERE idCliente = ? AND estado = 1";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Mascota mascota = new Mascota();
+                mascota.setIdMascota(rs.getInt("idMascota"));
+                mascota.setCliente(clienteData.buscarClientePorId(id));
+                mascota.setNombre(rs.getString("nombre"));
+                mascota.setSexo(rs.getString("sexo"));
+                mascota.setEspecie(rs.getString("especie"));
+                mascota.setRaza(rs.getString("raza"));
+                mascota.setColorPelo(rs.getString("colorPelo"));
+                mascota.setFechaNac(rs.getDate("fechaNac").toLocalDate());
+                mascota.setPesoMedio(rs.getDouble("pesoMedio"));
+                mascota.setPesoActual(rs.getDouble("pesoActual"));
+                mascota.setEstado(rs.getBoolean("estado"));
+                mascotas.add(mascota);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
+        }
+        return mascotas;
+    }
+    
 }

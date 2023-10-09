@@ -81,7 +81,7 @@ public class Visita {
 
     @Override
     public String toString() {
-        return "Visita{" + "idVisita=" + idVisita + ", cliente=" + cliente + ", mascota=" + mascota + ", tratamiento=" + tratamiento + ", fechaVisita=" + fechaVisita + '}';
+        return "Visita{" + "idVisita=" + idVisita + ", cliente=" + cliente.getIdCliente() + ", mascota=" + mascota.getIdMascota() + ", tratamiento=" + tratamiento.getIdTratamiento() + ", fechaVisita=" + fechaVisita + '}'+"\n";
     }
     
     

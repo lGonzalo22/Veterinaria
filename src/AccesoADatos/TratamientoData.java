@@ -162,4 +162,10 @@ public class TratamientoData {
         
         return tratamientos;
     }
+    
+    public void importeContado(){
+        
+        
+        
+    }
 }
