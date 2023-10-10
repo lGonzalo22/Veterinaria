@@ -163,9 +163,11 @@ public class TratamientoData {
         return tratamientos;
     }
     
-    public void importeContado(){
+    public double importeContado(Tratamiento tratamiento){
         
+            double descuento = (10*tratamiento.getImporte())/100;
+            double importeTotal = tratamiento.getImporte() - descuento;
         
-        
+            return importeTotal;
     }
 }

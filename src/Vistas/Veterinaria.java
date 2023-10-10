@@ -47,6 +47,7 @@ public class Veterinaria {
         //System.out.println(tratData.buscarTratamiento(1));
         //System.out.println(tratData.listarTratamientoPorTipo(TiposTratamientos.BAÑOYCORTE));
         //System.out.println(tratData.listarTratamiento());
+        //System.out.println(tratData.importeContado(tratamiento));
         
         
         Visita visita = new Visita(46,cliente, mascota, tratamiento, 53.5, LocalDate.of(2023, 10, 3));
