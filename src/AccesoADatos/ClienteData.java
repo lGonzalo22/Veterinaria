@@ -140,7 +140,7 @@ public class ClienteData {
         public ArrayList<Cliente> listarClientes(){
             
             ArrayList<Cliente> clientes = new ArrayList();
-            String sql = "SELECT * FROM cliente WHERE estado = 1";
+            String sql = "SELECT * FROM cliente";
             
         try {
             PreparedStatement ps = con.prepareStatement(sql);

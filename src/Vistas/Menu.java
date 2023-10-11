@@ -28,16 +28,23 @@ public class Menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDesktopPane1 = new javax.swing.JDesktopPane();
+        jDesktopPane1 = new javax.swing.JDesktopPane()
+        ;
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem9 = new javax.swing.JMenuItem();
+        jMenuItem10 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(700, 600));
@@ -60,6 +67,9 @@ public class Menu extends javax.swing.JFrame {
         jMenuItem1.setText("Agregar Cliente");
         jMenu1.add(jMenuItem1);
 
+        jMenuItem7.setText("Listado de clientes");
+        jMenu1.add(jMenuItem7);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Imagenes/mascotas (1).png"))); // NOI18N
@@ -67,12 +77,21 @@ public class Menu extends javax.swing.JFrame {
         jMenuItem2.setText("Agregar Mascota");
         jMenu2.add(jMenuItem2);
 
+        jMenuItem8.setText("Listado de mascotas");
+        jMenu2.add(jMenuItem8);
+
         jMenuBar1.add(jMenu2);
 
-        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Imagenes/vacuna (1).png"))); // NOI18N
+        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Imagenes/veterinario (1).png"))); // NOI18N
 
         jMenuItem3.setText("Agregar Tratamiento");
         jMenu3.add(jMenuItem3);
+
+        jMenuItem5.setText("Listado de tratamientos");
+        jMenu3.add(jMenuItem5);
+
+        jMenuItem6.setText("Listado por tipo");
+        jMenu3.add(jMenuItem6);
 
         jMenuBar1.add(jMenu3);
 
@@ -80,6 +99,12 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuItem4.setText("Agregar Visita");
         jMenu4.add(jMenuItem4);
+
+        jMenuItem9.setText("Visitas por mascotas");
+        jMenu4.add(jMenuItem9);
+
+        jMenuItem10.setText("Visitas por tratamiento");
+        jMenu4.add(jMenuItem10);
 
         jMenuBar1.add(jMenu4);
 
@@ -142,8 +167,14 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
     // End of variables declaration//GEN-END:variables
 }
