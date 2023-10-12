@@ -19,8 +19,8 @@ public class ClienteData {
     
     public void agregarCliente(Cliente cliente){
         
-        String sql = "INSERT INTO cliente(documento, cabezaDeFamilia, direccion, telefono, personaAlternativa, estado)"
-                + " VALUES (?,?,?,?,?,?)";
+        String sql = "INSERT INTO cliente(documento, cabezaDeFamilia, direccion, telefono, personaAlternativa, telefonoAlternativo, estado)"
+                + " VALUES (?,?,?,?,?,?,?)";
         
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -29,7 +29,8 @@ public class ClienteData {
             ps.setString(3, cliente.getDireccion());
             ps.setInt(4, cliente.getTelefono());
             ps.setString(5, cliente.getPersonaAlternativa());
-            ps.setBoolean(6, true);
+            ps.setInt(6, cliente.getTelefonoAlternativo());
+            ps.setBoolean(7, cliente.isEstado());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
@@ -62,7 +63,7 @@ public class ClienteData {
     }
     
     public void modificarCliente(Cliente cliente){
-        String sql = "UPDATE cliente SET documento = ?, cabezaDeFamilia = ?, direccion = ?, telefono = ?, personaAlternativa = ?, estado = ? WHERE idCliente = ?";
+        String sql = "UPDATE cliente SET documento = ?, cabezaDeFamilia = ?, direccion = ?, telefono = ?, personaAlternativa = ?, telefonoAlternativo = ?, estado = ? WHERE idCliente = ?";
     
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -71,8 +72,9 @@ public class ClienteData {
             ps.setString(3, cliente.getDireccion());
             ps.setInt(4, cliente.getTelefono());
             ps.setString(5, cliente.getPersonaAlternativa());
-            ps.setBoolean(6, cliente.isEstado());
-            ps.setInt(7, cliente.getIdCliente());
+            ps.setInt(6, cliente.getTelefonoAlternativo());
+            ps.setBoolean(7, cliente.isEstado());
+            ps.setInt(8, cliente.getIdCliente());
             int correcto = ps.executeUpdate();
             if (correcto == 1) {
                 JOptionPane.showMessageDialog(null, "Cliente modificado.");
@@ -100,6 +102,7 @@ public class ClienteData {
                 cliente.setDireccion(rs.getString("direccion"));
                 cliente.setTelefono(rs.getInt("telefono"));
                 cliente.setPersonaAlternativa(rs.getString("personaAlternativa"));
+                cliente.setTelefonoAlternativo(rs.getInt("telefonoAlternativo"));
                 cliente.setEstado(rs.getBoolean("estado"));
             }else{
                 JOptionPane.showMessageDialog(null, "El cliente no existe.");
@@ -126,6 +129,7 @@ public class ClienteData {
                 cliente.setDireccion(rs.getString("direccion"));
                 cliente.setTelefono(rs.getInt("telefono"));
                 cliente.setPersonaAlternativa(rs.getString("personaAlternativa"));
+                cliente.setTelefonoAlternativo(rs.getInt("telefonoAlternativo"));
                 cliente.setEstado(rs.getBoolean("estado"));
             }else{
                 JOptionPane.showMessageDialog(null, "El cliente no existe.");
@@ -145,7 +149,7 @@ public class ClienteData {
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
+            while (rs.next()) { 
                 Cliente cliente = new Cliente();
                 cliente.setIdCliente(rs.getInt("idCliente"));
                 cliente.setDocumento(rs.getInt("documento"));
@@ -153,6 +157,7 @@ public class ClienteData {
                 cliente.setDireccion(rs.getString("direccion"));
                 cliente.setTelefono(rs.getInt("telefono"));
                 cliente.setPersonaAlternativa(rs.getString("personaAlternativa"));
+                cliente.setTelefonoAlternativo(rs.getInt("telefonoAlternativo"));
                 cliente.setEstado(rs.getBoolean("estado"));
                 clientes.add(cliente);
             }
