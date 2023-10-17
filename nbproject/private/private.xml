@@ -3,14 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/gonza/OneDrive/Documentos/NetBeansProjects/Veterinaria/src/AccesoADatos/ClienteData.java</file>
-            <file>file:/C:/Users/gonza/OneDrive/Documentos/NetBeansProjects/Veterinaria/src/AccesoADatos/TratamientoData.java</file>
-            <file>file:/C:/Users/gonza/OneDrive/Documentos/NetBeansProjects/Veterinaria/src/Vistas/AgregarCliente.java</file>
-            <file>file:/C:/Users/gonza/OneDrive/Documentos/NetBeansProjects/Veterinaria/src/Vistas/AgregarMascota.java</file>
-            <file>file:/C:/Users/gonza/OneDrive/Documentos/NetBeansProjects/Veterinaria/src/Vistas/Menu.java</file>
-            <file>file:/C:/Users/gonza/OneDrive/Documentos/NetBeansProjects/Veterinaria/src/AccesoADatos/VisitaData.java</file>
-            <file>file:/C:/Users/gonza/OneDrive/Documentos/NetBeansProjects/Veterinaria/src/Vistas/Veterinaria.java</file>
-            <file>file:/C:/Users/gonza/OneDrive/Documentos/NetBeansProjects/Veterinaria/src/AccesoADatos/MascotaData.java</file>
+            <file>file:/E:/Proyectos%20GITHUB/Veterinaria/src/Vistas/ListadoVisitasPorTratamiento.java</file>
+            <file>file:/E:/Proyectos%20GITHUB/Veterinaria/src/Vistas/AgregarCliente.java</file>
+            <file>file:/E:/Proyectos%20GITHUB/Veterinaria/src/Vistas/ListadoVisitasPorMascota.java</file>
+            <file>file:/E:/Proyectos%20GITHUB/Veterinaria/src/Vistas/Menu.java</file>
+            <file>file:/E:/Proyectos%20GITHUB/Veterinaria/src/Vistas/AgregarVisita.java</file>
+            <file>file:/E:/Proyectos%20GITHUB/Veterinaria/src/Vistas/ListadoClientes.java</file>
+            <file>file:/E:/Proyectos%20GITHUB/Veterinaria/src/Vistas/ListadoTratamientosPorTipo.java</file>
+            <file>file:/E:/Proyectos%20GITHUB/Veterinaria/src/Vistas/Veterinaria.java</file>
+            <file>file:/E:/Proyectos%20GITHUB/Veterinaria/src/Vistas/ListadoMascotas.java</file>
         </group>
     </open-files>
 </project-private>
