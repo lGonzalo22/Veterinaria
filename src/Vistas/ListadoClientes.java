@@ -5,17 +5,29 @@
  */
 package Vistas;
 
+import AccesoADatos.ClienteData;
+import Entidades.Cliente;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+
 /**
  *
  * @author gonza
  */
 public class ListadoClientes extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form ListadoClientes
-     */
+    private ClienteData clienData = new ClienteData();
+
+    public DefaultTableModel modelo = new DefaultTableModel() {
+
+        public boolean filasColumnas(int filas, int columnas) {
+            return false;
+        }
+    };
+
     public ListadoClientes() {
         initComponents();
+        armarTabla();
     }
 
     /**
@@ -31,7 +43,7 @@ public class ListadoClientes extends javax.swing.JInternalFrame {
         jrbActivos = new javax.swing.JRadioButton();
         jrbInactivos = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jtTabla = new javax.swing.JTable();
         jbSalir = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
@@ -41,6 +53,11 @@ public class ListadoClientes extends javax.swing.JInternalFrame {
         jrbActivos.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jrbActivos.setForeground(new java.awt.Color(0, 0, 0));
         jrbActivos.setText("Mostrar activos");
+        jrbActivos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbActivosActionPerformed(evt);
+            }
+        });
 
         jrbInactivos.setBackground(new java.awt.Color(204, 204, 255));
         jrbInactivos.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -52,7 +69,7 @@ public class ListadoClientes extends javax.swing.JInternalFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jtTabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -63,10 +80,15 @@ public class ListadoClientes extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jtTabla);
 
         jbSalir.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jbSalir.setText("Salir");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
@@ -78,23 +100,22 @@ public class ListadoClientes extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jrbInactivos, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jrbActivos)
+                        .addGap(212, 212, 212)))
+                .addGap(135, 135, 135))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
-                .addGap(136, 136, 136))
+                .addGap(183, 183, 183))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addContainerGap(16, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jrbInactivos, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jrbActivos)
-                                    .addGap(212, 212, 212)))
-                            .addGap(74, 74, 74))))
-                .addContainerGap(19, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 629, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -107,9 +128,9 @@ public class ListadoClientes extends javax.swing.JInternalFrame {
                     .addComponent(jrbInactivos))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jbSalir)
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -127,17 +148,89 @@ public class ListadoClientes extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jrbInactivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbInactivosActionPerformed
-        // TODO add your handling code here:
+
+        if (jrbInactivos.isSelected()) {
+            jrbActivos.setSelected(false);
+        }else{
+            jrbInactivos.setSelected(true);
+        }
+        
+        modelo.setRowCount(0);
+        for (Cliente cliente : clienData.listarClientes()) {
+
+            if (!cliente.isEstado()) {
+                modelo.addRow(new Object[]{cliente.getIdCliente(), cliente.getDocumento(), cliente.getCabezaDeFamilia(), cliente.getDireccion(), cliente.getTelefono(), cliente.getPersonaAlternativa(), cliente.getTelefonoAlternativo(), cliente.isEstado()});
+            }
+        }
+
     }//GEN-LAST:event_jrbInactivosActionPerformed
+
+    private void jrbActivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbActivosActionPerformed
+
+        if (jrbActivos.isSelected()) {
+            jrbInactivos.setSelected(false);
+        }else{
+            jrbActivos.setSelected(true);
+        }
+        
+        modelo.setRowCount(0);
+        for (Cliente cliente : clienData.listarClientes()) {
+
+            if (cliente.isEstado()) {
+                modelo.addRow(new Object[]{cliente.getIdCliente(), cliente.getDocumento(), cliente.getCabezaDeFamilia(), cliente.getDireccion(), cliente.getTelefono(), cliente.getPersonaAlternativa(), cliente.getTelefonoAlternativo(), cliente.isEstado()});
+            }
+        }
+
+
+    }//GEN-LAST:event_jrbActivosActionPerformed
+
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+        
+        this.dispose();
+        
+    }//GEN-LAST:event_jbSalirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton jbSalir;
     private javax.swing.JRadioButton jrbActivos;
     private javax.swing.JRadioButton jrbInactivos;
+    private javax.swing.JTable jtTabla;
     // End of variables declaration//GEN-END:variables
+
+    public void armarTabla() {
+
+        modelo.addColumn("ID");
+        modelo.addColumn("DNI");
+        modelo.addColumn("Apellido y Nombre");
+        modelo.addColumn("Direccion");
+        modelo.addColumn("Telefono");
+        modelo.addColumn("Persona Alternativa");
+        modelo.addColumn("Telefono Alternativo");
+        modelo.addColumn("Estado");
+        jtTabla.setModel(modelo);
+
+        // Supongamos que "table" es el nombre de tu tabla
+        //javax.swing.table.TableColumn column = table.getColumnModel().getColumn(columnIndex); // Reemplaza "columnIndex" con el índice de la columna que deseas ajustar
+        //column.setPreferredWidth(newWidth); // Reemplaza "newWidth" con el nuevo ancho deseado
+       TableColumn column = jtTabla.getColumnModel().getColumn(0);
+//        column.setPreferredWidth(160);
+      // column = jtTabla.getColumnModel().getColumn(0);
+        column.setPreferredWidth(25);
+//        column = jtTabla.getColumnModel().getColumn(1);
+//        column.setPreferredWidth(40);
+//        column = jtTabla.getColumnModel().getColumn(3);
+//        column.setPreferredWidth(90);
+//        column = jtTabla.getColumnModel().getColumn(5);
+//        column.setPreferredWidth(160);
+//        column = jtTabla.getColumnModel().getColumn(6);
+//        column.setPreferredWidth(160);
+        column = jtTabla.getColumnModel().getColumn(7);
+        column.setPreferredWidth(40);
+
+    }
+
 }

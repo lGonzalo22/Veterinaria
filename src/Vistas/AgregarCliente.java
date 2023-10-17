@@ -133,6 +133,11 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
 
         jbEliminar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jbEliminar.setText("Eliminar");
+        jbEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEliminarActionPerformed(evt);
+            }
+        });
 
         jbNuevo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jbNuevo.setText("Nuevo");
@@ -269,11 +274,11 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
                     .addComponent(jLabel8)
                     .addComponent(jtTelefonoAlternativo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jrbActivo)
-                        .addComponent(jrbInactivo)))
+                        .addComponent(jrbInactivo))
+                    .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbSalir)
@@ -313,8 +318,10 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
                     jtTelefono.setText(cliente.getTelefono() + "");
                     jtPersonaAlternativa.setText(cliente.getPersonaAlternativa());
                     jtTelefonoAlternativo.setText(cliente.getTelefonoAlternativo() + "");
+                    
                     jrbActivo.setSelected(cliente.isEstado());
                     jrbInactivo.setSelected(!cliente.isEstado());
+                    jbEliminar.setEnabled(cliente.isEstado());
                 } else {
                     jtDocumento.setText("");
                 }
@@ -359,13 +366,13 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
             boolean inactivo = jrbInactivo.isSelected();
 
             cliente = clienData.buscarClientePorDni(documento);
-            
+
             if (activo && documento != cliente.getDocumento()) {
                 clienData.agregarCliente(new Cliente(documento, apellidoYNombre, direccion, telefono, personaAlternativa, telefonoAlternativo, activo));
             } else if (inactivo && documento != cliente.getDocumento()) {
                 clienData.agregarCliente(new Cliente(documento, apellidoYNombre, direccion, telefono, personaAlternativa, telefonoAlternativo, inactivo));
             }
-            
+
             if (cliente != null) {
 
                 cliente.setDocumento(documento);
@@ -391,7 +398,6 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
                     jtTelefonoAlternativo.setText("");
                     jrbActivo.setSelected(false);
                     jrbInactivo.setSelected(false);
-                    JOptionPane.showMessageDialog(this, "Cliente modificado correctamente.");
                 } else {
                     jtDocumento.setText("");
                     jtApellidoYNombre.setText("");
@@ -478,6 +484,21 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
         }
 
     }//GEN-LAST:event_jrbActivoActionPerformed
+
+    private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
+
+        if (jtDocumento.getText().isEmpty() || jtApellidoYNombre.getText().isEmpty() || jtDireccion.getText().isEmpty() || jtTelefono.getText().isEmpty() || jtPersonaAlternativa.getText().isEmpty() || jtTelefonoAlternativo.getText().isEmpty() || (!jrbActivo.isSelected() && !jrbInactivo.isSelected())) {
+            JOptionPane.showMessageDialog(this, "Llene los espacios vacios.");
+        } else {
+            int documento = Integer.parseInt(jtDocumento.getText());
+            if (documento == cliente.getDocumento()) {
+                clienData.eliminarCliente(cliente.getIdCliente());
+            }
+            
+        }
+
+
+    }//GEN-LAST:event_jbEliminarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

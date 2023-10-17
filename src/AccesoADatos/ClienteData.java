@@ -77,7 +77,7 @@ public class ClienteData {
             ps.setInt(8, cliente.getIdCliente());
             int correcto = ps.executeUpdate();
             if (correcto == 1) {
-                JOptionPane.showMessageDialog(null, "Cliente modificado.");
+                JOptionPane.showMessageDialog(null, "Cliente modificado correctamente.");
             }else{
                 JOptionPane.showMessageDialog(null, "El cliente no existe.");
             }
@@ -115,7 +115,7 @@ public class ClienteData {
     }
     
         public Cliente buscarClientePorDni(int documento){
-        Cliente cliente = new Cliente();
+        Cliente cliente = null;
         String sql = "SELECT * FROM cliente WHERE documento = ?";
         
         try {
@@ -123,6 +123,7 @@ public class ClienteData {
             ps.setInt(1, documento);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
+                cliente = new Cliente();
                 cliente.setIdCliente(rs.getInt("idCliente"));
                 cliente.setDocumento(documento);
                 cliente.setCabezaDeFamilia(rs.getString("CabezaDeFamilia"));
