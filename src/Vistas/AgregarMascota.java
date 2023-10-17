@@ -7,6 +7,11 @@ package Vistas;
 
 import AccesoADatos.MascotaData;
 import Entidades.Mascota;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,7 +21,7 @@ public class AgregarMascota extends javax.swing.JInternalFrame {
 
     private MascotaData mascData = new MascotaData();
     private Mascota mascota = null;
-    
+
     public AgregarMascota() {
         initComponents();
     }
@@ -56,6 +61,9 @@ public class AgregarMascota extends javax.swing.JInternalFrame {
         jbNuevo = new javax.swing.JButton();
         jtPesoMedio = new javax.swing.JTextField();
         jbBuscar = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        jrbActivo = new javax.swing.JRadioButton();
+        jrbInactivo = new javax.swing.JRadioButton();
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 255));
 
@@ -118,23 +126,48 @@ public class AgregarMascota extends javax.swing.JInternalFrame {
         jrbMacho.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jrbMacho.setForeground(new java.awt.Color(0, 0, 0));
         jrbMacho.setText("Macho");
+        jrbMacho.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbMachoActionPerformed(evt);
+            }
+        });
 
         jrbHembra.setBackground(new java.awt.Color(204, 204, 255));
         jrbHembra.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jrbHembra.setForeground(new java.awt.Color(0, 0, 0));
         jrbHembra.setText("Hembra");
+        jrbHembra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbHembraActionPerformed(evt);
+            }
+        });
 
         jbSalir.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jbSalir.setText("Salir");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
 
         jbGuardar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jbGuardar.setText("Guardar");
+        jbGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGuardarActionPerformed(evt);
+            }
+        });
 
         jbEliminar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jbEliminar.setText("Eliminar");
 
         jbNuevo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jbNuevo.setText("Nuevo");
+        jbNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbNuevoActionPerformed(evt);
+            }
+        });
 
         jtPesoMedio.setEditable(false);
 
@@ -147,67 +180,36 @@ public class AgregarMascota extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel11.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel11.setText("Estado:");
+
+        jrbActivo.setBackground(new java.awt.Color(204, 204, 255));
+        jrbActivo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jrbActivo.setForeground(new java.awt.Color(0, 0, 0));
+        jrbActivo.setText("Activo");
+        jrbActivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbActivoActionPerformed(evt);
+            }
+        });
+
+        jrbInactivo.setBackground(new java.awt.Color(204, 204, 255));
+        jrbInactivo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jrbInactivo.setForeground(new java.awt.Color(0, 0, 0));
+        jrbInactivo.setText("Inactivo");
+        jrbInactivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbInactivoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addGap(18, 18, 18)
-                                .addComponent(jtPesoMedio, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel9)
-                                .addGap(18, 18, 18)
-                                .addComponent(jtPesoActual, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel10)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(fechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(93, 93, 93)
-                                                .addComponent(jLabel2))
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(10, 10, 10)
-                                                .addComponent(jtNombre))))
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                            .addComponent(jLabel5)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(jtEspecie))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                            .addComponent(jLabel8)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(jtColorPelo))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jLabel6)
-                                                .addComponent(jLabel4))
-                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                                    .addGap(43, 43, 43)
-                                                    .addComponent(jrbMacho)
-                                                    .addGap(18, 18, 18)
-                                                    .addComponent(jrbHembra))
-                                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                                    .addGap(37, 37, 37)
-                                                    .addComponent(jtRaza, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel1)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jbBuscar)))
-                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGap(52, 52, 52)
                         .addComponent(jbNuevo)
@@ -216,7 +218,69 @@ public class AgregarMascota extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jbGuardar)
                         .addGap(18, 18, 18)
-                        .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel11)
+                                .addGap(43, 43, 43)
+                                .addComponent(jrbActivo)
+                                .addGap(18, 18, 18)
+                                .addComponent(jrbInactivo))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel7)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jtPesoMedio, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel9)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jtPesoActual, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addComponent(jLabel10)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(fechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addComponent(jLabel3)
+                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                                    .addGap(93, 93, 93)
+                                                    .addComponent(jLabel2))
+                                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                                    .addGap(10, 10, 10)
+                                                    .addComponent(jtNombre))))
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                                .addComponent(jLabel5)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(jtEspecie))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                                .addComponent(jLabel8)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jtColorPelo))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jLabel6)
+                                                    .addComponent(jLabel4))
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                                        .addGap(43, 43, 43)
+                                                        .addComponent(jrbMacho)
+                                                        .addGap(18, 18, 18)
+                                                        .addComponent(jrbHembra))
+                                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                                        .addGap(37, 37, 37)
+                                                        .addComponent(jtRaza, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addComponent(jLabel1)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(jtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(jbBuscar)))
+                                    .addGap(0, 0, Short.MAX_VALUE))))))
                 .addContainerGap(67, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -264,7 +328,12 @@ public class AgregarMascota extends javax.swing.JInternalFrame {
                     .addComponent(jLabel9)
                     .addComponent(jtPesoActual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtPesoMedio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(jrbActivo)
+                    .addComponent(jrbInactivo))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbSalir)
                     .addComponent(jbGuardar)
@@ -288,18 +357,130 @@ public class AgregarMascota extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
-        
-        //int codigo
-        
-        
-        
+
+        int codigo = Integer.parseInt(jtCodigo.getText());
+
+        mascota = mascData.buscarMascota(codigo);
+
+        if (mascota != null) {
+            int op = JOptionPane.showConfirmDialog(this, "Mascota encontrada. Desea cargarla?");
+
+            if (op == 0) {
+                jtNombre.setText(mascota.getNombre());
+                if (mascota.getSexo().equals("masculino")) {
+                    jrbMacho.setSelected(true);
+                } else if (mascota.getSexo().equals("femenino")) {
+                    jrbHembra.setSelected(true);
+                }
+                jtEspecie.setText(mascota.getEspecie());
+                jtRaza.setText(mascota.getRaza());
+                jtColorPelo.setText(mascota.getColorPelo());
+                fechaNacimiento.setDate(Date.valueOf(mascota.getFechaNac()));
+                jtPesoMedio.setText(mascota.getPesoMedio() + "");
+                jtPesoActual.setText(mascota.getPesoActual() + "");
+                jrbActivo.setSelected(mascota.isEstado());
+                jrbInactivo.setSelected(!mascota.isEstado());
+                jbEliminar.setEnabled(mascota.isEstado());
+            } else {
+                jtCodigo.setText("");
+            }
+        }
+
+
     }//GEN-LAST:event_jbBuscarActionPerformed
+
+    private void jrbMachoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbMachoActionPerformed
+
+        if (jrbMacho.isSelected()) {
+            jrbHembra.setSelected(false);
+
+        } else {
+            jrbMacho.setSelected(true);
+        }
+
+    }//GEN-LAST:event_jrbMachoActionPerformed
+
+    private void jrbHembraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbHembraActionPerformed
+
+        if (jrbHembra.isSelected()) {
+            jrbMacho.setSelected(false);
+
+        } else {
+            jrbHembra.setSelected(true);
+        }
+
+    }//GEN-LAST:event_jrbHembraActionPerformed
+
+    private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
+
+        jtCodigo.setText("");
+        jtNombre.setText("");
+        jrbMacho.setSelected(false);
+        jrbHembra.setSelected(false);
+        jtEspecie.setText("");
+        jtRaza.setText("");
+        jtColorPelo.setText("");
+        fechaNacimiento.setDate(null);
+        jtPesoMedio.setText("");
+        jtPesoActual.setText("");
+        jrbActivo.setSelected(false);
+        jrbInactivo.setSelected(false);
+
+    }//GEN-LAST:event_jbNuevoActionPerformed
+
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jbSalirActionPerformed
+
+    private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
+
+        int codigo = Integer.parseInt(jtCodigo.getText());
+        String nombre = jtNombre.getText();
+        boolean macho = jrbMacho.isSelected();
+        boolean hembra = jrbHembra.isSelected();
+        String sexoM = "masculino";
+        String sexoF = "femenino";
+        String especie = jtEspecie.getText();
+        String raza = jtRaza.getText();
+        String colorPelo = jtColorPelo.getText();
+
+        SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
+        String fecha = formato.format(fechaNacimiento.getDate());
+        LocalDate fechaLocal = LocalDate.parse(fecha, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+
+        double pesoMedio = Double.parseDouble(jtPesoMedio.getText());
+        double pesoActual = Double.parseDouble(jtPesoActual.getText());
+
+        boolean activo = jrbActivo.isSelected();
+        boolean inactivo = jrbInactivo.isSelected();
+
+        mascota = mascData.buscarMascota(codigo);
+
+        if (macho && activo && codigo != mascota.getIdMascota()) {
+            mascData.agregarMascota(new Mascota(mascota.getCliente(), nombre, sexoM, especie, raza, colorPelo, fechaLocal, pesoMedio, pesoActual, activo));
+        } else if (macho && inactivo && codigo != mascota.getIdMascota()) {
+            mascData.agregarMascota(new Mascota(mascota.getCliente(), nombre, sexoM, especie, raza, colorPelo, fechaLocal, pesoMedio, pesoActual, inactivo));
+        } else if (hembra && activo && codigo != mascota.getIdMascota()) {
+            mascData.agregarMascota(new Mascota(mascota.getCliente(), nombre, sexoF, especie, raza, colorPelo, fechaLocal, pesoMedio, pesoActual, activo));
+        } else if (hembra && inactivo && codigo != mascota.getIdMascota()) {
+            mascData.agregarMascota(new Mascota(mascota.getCliente(), nombre, sexoF, especie, raza, colorPelo, fechaLocal, pesoMedio, pesoActual, inactivo));
+        }
+    }//GEN-LAST:event_jbGuardarActionPerformed
+
+    private void jrbActivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbActivoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jrbActivoActionPerformed
+
+    private void jrbInactivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbInactivoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jrbInactivoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser fechaNacimiento;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -314,7 +495,9 @@ public class AgregarMascota extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbGuardar;
     private javax.swing.JButton jbNuevo;
     private javax.swing.JButton jbSalir;
+    private javax.swing.JRadioButton jrbActivo;
     private javax.swing.JRadioButton jrbHembra;
+    private javax.swing.JRadioButton jrbInactivo;
     private javax.swing.JRadioButton jrbMacho;
     private javax.swing.JTextField jtCodigo;
     private javax.swing.JTextField jtColorPelo;

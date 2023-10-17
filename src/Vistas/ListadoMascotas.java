@@ -172,4 +172,5 @@ public class ListadoMascotas extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton jrbActivos;
     private javax.swing.JRadioButton jrbInactivos;
     // End of variables declaration//GEN-END:variables
+
 }
