@@ -5,7 +5,14 @@
  */
 package Vistas;
 
+
+import AccesoADatos.ClienteData;
+import AccesoADatos.MascotaData;
 import Entidades.Cliente;
+import Entidades.Mascota;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -13,11 +20,24 @@ import Entidades.Cliente;
  */
 public class ListadoMascotas extends javax.swing.JInternalFrame {
 
+        ClienteData clienData = new ClienteData();
+        MascotaData mascData = new MascotaData();
+        Cliente cliente = new Cliente();
+        
+        public DefaultTableModel modelo = new DefaultTableModel() {
+            
+            public boolean filasColumnas(int filas, int columnas){
+                return false;
+            }
+        };
+        
     /**
      * Creates new form ListadoMascotas
      */
     public ListadoMascotas() {
         initComponents();
+        cargarCombo();
+        armarTabla();
     }
 
     /**
@@ -36,7 +56,7 @@ public class ListadoMascotas extends javax.swing.JInternalFrame {
         jrbActivos = new javax.swing.JRadioButton();
         jrbInactivos = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jtTabla = new javax.swing.JTable();
         jbEliminar = new javax.swing.JButton();
         jbSalir = new javax.swing.JButton();
 
@@ -50,10 +70,21 @@ public class ListadoMascotas extends javax.swing.JInternalFrame {
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Seleccione un cliente:");
 
+        jcbCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbClienteActionPerformed(evt);
+            }
+        });
+
         jrbActivos.setBackground(new java.awt.Color(204, 204, 255));
         jrbActivos.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jrbActivos.setForeground(new java.awt.Color(0, 0, 0));
         jrbActivos.setText("Mostrar activos");
+        jrbActivos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbActivosActionPerformed(evt);
+            }
+        });
 
         jrbInactivos.setBackground(new java.awt.Color(204, 204, 255));
         jrbInactivos.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -65,7 +96,7 @@ public class ListadoMascotas extends javax.swing.JInternalFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jtTabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -76,10 +107,15 @@ public class ListadoMascotas extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jtTabla);
 
         jbEliminar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jbEliminar.setText("Eliminar");
+        jbEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEliminarActionPerformed(evt);
+            }
+        });
 
         jbSalir.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jbSalir.setText("Salir");
@@ -156,20 +192,84 @@ public class ListadoMascotas extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jrbInactivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbInactivosActionPerformed
-        // TODO add your handling code here:
+        if(jrbInactivos.isSelected()) {
+            jrbActivos.setSelected(false);
+        }
+        modelo.setRowCount(0);
+        for (Mascota mascota : mascData.listarMascota()) {
+            if (!mascota.isEstado())
+            modelo.addRow(new Object[] {mascota.getIdMascota(), mascota.getNombre(), mascota.getSexo(), mascota.getEspecie(), mascota.getRaza(), mascota.getColorPelo(), mascota.getFechaNac(), mascota.getPesoMedio(), mascota.getPesoActual()});
+        }
+        
     }//GEN-LAST:event_jrbInactivosActionPerformed
 
+    private void jcbClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbClienteActionPerformed
+        modelo.setRowCount(0);
+        cliente = (Cliente) jcbCliente.getSelectedItem();
+        for (Mascota mascota : mascData.listarMascotaPorCliente(cliente.getIdCliente())) {
+            modelo.addRow(new Object[] {mascota.getIdMascota(), mascota.getNombre(), mascota.getSexo(), mascota.getEspecie(), mascota.getRaza(), mascota.getColorPelo(), mascota.getFechaNac(), mascota.getPesoMedio(), mascota.getPesoActual()});
+        }
+    }//GEN-LAST:event_jcbClienteActionPerformed
 
+    private void jrbActivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbActivosActionPerformed
+        
+        if(jrbActivos.isSelected()) {
+            jrbInactivos.setSelected(false);
+            modelo.setRowCount(0);
+        }
+        for (Mascota mascota : mascData.listarMascota()) {
+            if (mascota.isEstado())
+            modelo.addRow(new Object[] {mascota.getIdMascota(), mascota.getNombre(), mascota.getSexo(), mascota.getEspecie(), mascota.getRaza(), mascota.getColorPelo(), mascota.getFechaNac(), mascota.getPesoMedio(), mascota.getPesoActual()});
+        }
+    }//GEN-LAST:event_jrbActivosActionPerformed
+
+    private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
+        // ELIMINAR MASCOTA
+        
+        ArrayList<Mascota> lista = new ArrayList();
+        int fila = jtTabla.getSelectedRow();
+        if(fila == (-1)) {
+            JOptionPane.showMessageDialog(this, "Seleccione una fila.");
+        } else {
+            for (int i = 0; i <= fila; i++) {
+                if (i == fila) {
+                    
+                }
+            }
+        }      
+    }//GEN-LAST:event_jbEliminarActionPerformed
+
+    private void cargarCombo() {
+        
+        for (Cliente cliente : clienData.listarClientes()) {
+            jcbCliente.addItem(cliente);
+        }
+        
+    }
+    
+    private void armarTabla() {
+        modelo.addColumn("ID");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Sexo");
+        modelo.addColumn("Especie");
+        modelo.addColumn("Raza");
+        modelo.addColumn("Color Pelo");
+        modelo.addColumn("Fecha Nacimiento");
+        modelo.addColumn("Peso Medio");
+        modelo.addColumn("Peso Actual");
+        jtTabla.setModel(modelo);
+        
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton jbEliminar;
     private javax.swing.JButton jbSalir;
     private javax.swing.JComboBox<Cliente> jcbCliente;
     private javax.swing.JRadioButton jrbActivos;
     private javax.swing.JRadioButton jrbInactivos;
+    private javax.swing.JTable jtTabla;
     // End of variables declaration//GEN-END:variables
 }
