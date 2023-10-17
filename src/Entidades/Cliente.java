@@ -8,24 +8,27 @@ public class Cliente {
     private String direccion;
     private int telefono;
     private String personaAlternativa;
+    private int telefonoAlternativo;
     private boolean estado;
 
-    public Cliente(int idCliente, int documento, String cabezaDeFamilia, String direccion, int telefono, String personaAlternativa, boolean estado) {
+    public Cliente(int idCliente, int documento, String cabezaDeFamilia, String direccion, int telefono, String personaAlternativa,int telefonoAlternativo, boolean estado) {
         this.idCliente = idCliente;
         this.documento = documento;
         this.cabezaDeFamilia = cabezaDeFamilia;
         this.direccion = direccion;
         this.telefono = telefono;
         this.personaAlternativa = personaAlternativa;
+        this.telefonoAlternativo = telefonoAlternativo;
         this.estado = estado;
     }
     
-        public Cliente(int documento, String cabezaDeFamilia, String direccion, int telefono, String personaAlternativa, boolean estado) {
+        public Cliente(int documento, String cabezaDeFamilia, String direccion, int telefono, String personaAlternativa, int telefonoAlternativo, boolean estado) {
         this.documento = documento;
         this.cabezaDeFamilia = cabezaDeFamilia;
         this.direccion = direccion;
         this.telefono = telefono;
         this.personaAlternativa = personaAlternativa;
+        this.telefonoAlternativo = telefonoAlternativo;
         this.estado = estado;
     }
 
@@ -80,6 +83,14 @@ public class Cliente {
         this.personaAlternativa = personaAlternativa;
     }
 
+    public int getTelefonoAlternativo() {
+        return telefonoAlternativo;
+    }
+
+    public void setTelefonoAlternativo(int telefonoAlternativo) {
+        this.telefonoAlternativo = telefonoAlternativo;
+    }
+    
     public boolean isEstado() {
         return estado;
     }
@@ -90,7 +101,9 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return "Cliente{" + "idCliente=" + idCliente + ", documento=" + documento + ", cabezaDeFamilia=" + cabezaDeFamilia + ", direccion=" + direccion + ", telefono=" + telefono + ", personaAlternativa=" + personaAlternativa + '}'+"\n";
+        return "Cliente{" + "idCliente=" + idCliente + ", documento=" + documento + ", cabezaDeFamilia=" + cabezaDeFamilia + ", direccion=" + direccion + ", telefono=" + telefono + ", personaAlternativa=" + personaAlternativa + ", telefonoAlternativo=" + telefonoAlternativo + ", estado=" + estado + '}'+"\n";
     }
+
+    
     
 }

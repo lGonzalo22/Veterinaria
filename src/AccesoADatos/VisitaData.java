@@ -78,8 +78,8 @@ public class VisitaData {
 
             sumaPesoActual = (sumaPesoActual + visita.getPesoActual());
             pesoPromedio = sumaPesoActual / cont;
-            System.out.println("SumaPesoActual: " + sumaPesoActual);
-            System.out.println("Peso promedio: " + pesoPromedio);
+            //System.out.println("SumaPesoActual: " + sumaPesoActual);
+            //System.out.println("Peso promedio: " + pesoPromedio);
 
             String sql2 = "UPDATE mascota SET pesoMedio = " + pesoPromedio + "WHERE idMascota = " + visita.getMascota().getIdMascota();
             PreparedStatement ps2 = con.prepareStatement(sql2);
