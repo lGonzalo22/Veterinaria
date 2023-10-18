@@ -3,7 +3,7 @@ package Entidades;
 import java.time.LocalDate;
 
 public class Mascota {
-    
+
     private int idMascota;
     private Cliente cliente;
     private String nombre;
@@ -30,7 +30,7 @@ public class Mascota {
         this.estado = estado;
     }
 
-        public Mascota(Cliente cliente,String nombre, String sexo, String especie, String raza, String colorPelo, LocalDate fechaNac, double pesoMedio, double pesoActual, boolean estado) {
+    public Mascota(Cliente cliente, String nombre, String sexo, String especie, String raza, String colorPelo, LocalDate fechaNac, double pesoMedio, double pesoActual, boolean estado) {
         this.cliente = cliente;
         this.nombre = nombre;
         this.sexo = sexo;
@@ -42,7 +42,7 @@ public class Mascota {
         this.pesoActual = pesoActual;
         this.estado = estado;
     }
-    
+
     public Mascota() {
     }
 
@@ -62,7 +62,6 @@ public class Mascota {
         this.cliente = cliente;
     }
 
-    
     public String getNombre() {
         return nombre;
     }
@@ -137,6 +136,6 @@ public class Mascota {
 
     @Override
     public String toString() {
-        return "Mascota{" + "idMascota=" + idMascota + ", cliente=" + cliente.getIdCliente() + ", nombre=" + nombre + ", sexo=" + sexo + ", especie=" + especie + ", raza=" + raza + ", colorPelo=" + colorPelo + ", fechaNac=" + fechaNac + ", pesoMedio=" + pesoMedio + ", pesoActual=" + pesoActual + ", estado=" + estado + '}'+"\n";
-    }    
+        return "Mascota{" + "idMascota=" + idMascota + ", cliente=" + cliente.getIdCliente() + ", nombre=" + nombre + ", sexo=" + sexo + ", especie=" + especie + ", raza=" + raza + ", colorPelo=" + colorPelo + ", fechaNac=" + fechaNac + ", pesoMedio=" + pesoMedio + ", pesoActual=" + pesoActual + ", estado=" + estado + '}' + "\n";
+    }
 }
