@@ -15,7 +15,7 @@ public class Veterinaria {
 
     public static void main(String[] args) {
 
-        Cliente cliente = new Cliente(2,43121, "Gandalf", "Mitre 243", 65342312, "Gimly",234565,true);
+        Cliente cliente = new Cliente(2,43121, "Gandalf", "Mitre 243", 65342312, "Gimly",true);
         ClienteData clienData = new ClienteData();
         
         //clienData.agregarCliente(cliente);
@@ -26,7 +26,7 @@ public class Veterinaria {
         //System.out.println(clienData.buscarClientePorId(2));
         //System.out.println(clienData.buscarClientePorDni(12345));
         
-        System.out.println(clienData.listarClientes());
+        //System.out.println(clienData.listarClientes());
         
         Mascota mascota = new Mascota(5,cliente,"Yago", "masculino", "perro", "golden", "negro", LocalDate.of(2010, 5, 25), 48.375, 52, true);
         MascotaData mascData = new MascotaData();

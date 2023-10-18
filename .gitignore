@@ -22,14 +22,17 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
-*.properties
-*.properties
-*.form
 *.form
 build/classes/Vistas/Menu.form
-nbproject/private/private.properties
-nbproject/private/private.xml
+*.form
+build/classes/Vistas/Menu.form
+build/classes/Vistas/Menu.form
 nbproject/project.properties
 src/Vistas/Menu.form
-src/Vistas/Menu.form
-*.form
+src/Vistas/Menu.java
+build/classes/Vistas/Menu.form
+build/classes/Vistas/Menu.form
+build/classes/Vistas/Menu.form
+build/classes/Vistas/Menu.form
+nbproject/private/private.properties
+nbproject/project.properties
