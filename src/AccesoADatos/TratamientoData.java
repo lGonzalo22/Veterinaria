@@ -141,7 +141,7 @@ public class TratamientoData {
     
     public ArrayList<Tratamiento> listarTratamiento(){
         
-        String sql = "SELECT * FROM tratamiento";
+        String sql = "SELECT * FROM tratamiento WHERE activo = 1";
         ArrayList<Tratamiento> tratamientos = new ArrayList();
         
         try {
