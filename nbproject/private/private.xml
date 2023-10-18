@@ -3,15 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/gonza/OneDrive/Documentos/NetBeansProjects/Veterinaria/src/AccesoADatos/ClienteData.java</file>
-            <file>file:/C:/Users/gonza/OneDrive/Documentos/NetBeansProjects/Veterinaria/src/AccesoADatos/TratamientoData.java</file>
-            <file>file:/C:/Users/gonza/OneDrive/Documentos/NetBeansProjects/Veterinaria/src/Vistas/Menu.java</file>
-            <file>file:/C:/Users/gonza/OneDrive/Documentos/NetBeansProjects/Veterinaria/src/AccesoADatos/VisitaData.java</file>
-            <file>file:/C:/Users/gonza/OneDrive/Documentos/NetBeansProjects/Veterinaria/src/Vistas/Veterinaria.java</file>
-            <file>file:/C:/Users/gonza/OneDrive/Documentos/NetBeansProjects/Veterinaria/src/Entidades/Mascota.java</file>
-            <file>file:/C:/Users/gonza/OneDrive/Documentos/NetBeansProjects/Veterinaria/src/Entidades/Tratamiento.java</file>
-            <file>file:/C:/Users/gonza/OneDrive/Documentos/NetBeansProjects/Veterinaria/src/Entidades/Visita.java</file>
-            <file>file:/C:/Users/gonza/OneDrive/Documentos/NetBeansProjects/Veterinaria/src/AccesoADatos/MascotaData.java</file>
+            <file>file:/C:/Users/User/Documents/GitHub/Veterinaria/src/Entidades/Cliente.java</file>
+            <file>file:/C:/Users/User/Documents/GitHub/Veterinaria/src/Vistas/Menu.java</file>
+            <file>file:/C:/Users/User/Documents/GitHub/Veterinaria/src/Entidades/Mascota.java</file>
+            <file>file:/C:/Users/User/Documents/GitHub/Veterinaria/src/Entidades/Visita.java</file>
         </group>
     </open-files>
 </project-private>
