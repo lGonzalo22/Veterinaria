@@ -3,6 +3,7 @@ package Vistas;
 import AccesoADatos.ClienteData;
 import AccesoADatos.MascotaData;
 import Entidades.Cliente;
+import AccesoADatos.MascotaData;
 import Entidades.Mascota;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
@@ -10,6 +11,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 
+/**
+ *
+ * @author gonza
+ */
 public class AgregarMascota extends javax.swing.JInternalFrame {
 
     private MascotaData mascData = new MascotaData();
@@ -145,6 +150,18 @@ public class AgregarMascota extends javax.swing.JInternalFrame {
             }
         });
 
+        jtNombre.setBackground(new java.awt.Color(255, 255, 255));
+        jtNombre.setForeground(new java.awt.Color(0, 0, 0));
+
+        jtEspecie.setBackground(new java.awt.Color(255, 255, 255));
+        jtEspecie.setForeground(new java.awt.Color(0, 0, 0));
+
+        jtRaza.setBackground(new java.awt.Color(255, 255, 255));
+        jtRaza.setForeground(new java.awt.Color(0, 0, 0));
+
+        jtColorPelo.setBackground(new java.awt.Color(255, 255, 255));
+        jtColorPelo.setForeground(new java.awt.Color(0, 0, 0));
+
         jrbMacho.setBackground(new java.awt.Color(204, 204, 255));
         jrbMacho.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jrbMacho.setForeground(new java.awt.Color(0, 0, 0));
@@ -278,6 +295,15 @@ public class AgregarMascota extends javax.swing.JInternalFrame {
                                             .addComponent(jLabel10)
                                             .addGap(18, 18, 18)
                                             .addComponent(fechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addComponent(jLabel3)
+                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                                    .addGap(93, 93, 93)
+                                                    .addComponent(jLabel2))
+                                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                                    .addGap(10, 10, 10)
+                                                    .addComponent(jtNombre))))
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                                 .addComponent(jLabel5)
@@ -320,6 +346,7 @@ public class AgregarMascota extends javax.swing.JInternalFrame {
                                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                                         .addGap(10, 10, 10)
                                                         .addComponent(jtNombre))))))
+                                            .addComponent(jbBuscar)))
                                     .addGap(0, 0, Short.MAX_VALUE))))))
                 .addContainerGap(67, Short.MAX_VALUE))
         );
@@ -378,6 +405,7 @@ public class AgregarMascota extends javax.swing.JInternalFrame {
                     .addComponent(jrbActivo)
                     .addComponent(jrbInactivo))
                 .addGap(39, 39, 39)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbSalir)
                     .addComponent(jbGuardar)
@@ -419,6 +447,11 @@ public class AgregarMascota extends javax.swing.JInternalFrame {
                 } else if (mascota.getSexo().equals("hembra")) {
                     jrbHembra.setSelected(true);
                     jrbMacho.setSelected(false);
+                jtNombre.setText(mascota.getNombre());
+                if (mascota.getSexo().equals("masculino")) {
+                    jrbMacho.setSelected(true);
+                } else if (mascota.getSexo().equals("femenino")) {
+                    jrbHembra.setSelected(true);
                 }
                 jtEspecie.setText(mascota.getEspecie());
                 jtRaza.setText(mascota.getRaza());
@@ -575,6 +608,36 @@ public class AgregarMascota extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(this, "La mascota no se modifico.");
                 }
             }
+        int codigo = Integer.parseInt(jtCodigo.getText());
+        String nombre = jtNombre.getText();
+        boolean macho = jrbMacho.isSelected();
+        boolean hembra = jrbHembra.isSelected();
+        String sexoM = "masculino";
+        String sexoF = "femenino";
+        String especie = jtEspecie.getText();
+        String raza = jtRaza.getText();
+        String colorPelo = jtColorPelo.getText();
+
+        SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
+        String fecha = formato.format(fechaNacimiento.getDate());
+        LocalDate fechaLocal = LocalDate.parse(fecha, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+
+        double pesoMedio = Double.parseDouble(jtPesoMedio.getText());
+        double pesoActual = Double.parseDouble(jtPesoActual.getText());
+
+        boolean activo = jrbActivo.isSelected();
+        boolean inactivo = jrbInactivo.isSelected();
+
+        mascota = mascData.buscarMascota(codigo);
+
+        if (macho && activo && codigo != mascota.getIdMascota()) {
+            mascData.agregarMascota(new Mascota(mascota.getCliente(), nombre, sexoM, especie, raza, colorPelo, fechaLocal, pesoMedio, pesoActual, activo));
+        } else if (macho && inactivo && codigo != mascota.getIdMascota()) {
+            mascData.agregarMascota(new Mascota(mascota.getCliente(), nombre, sexoM, especie, raza, colorPelo, fechaLocal, pesoMedio, pesoActual, inactivo));
+        } else if (hembra && activo && codigo != mascota.getIdMascota()) {
+            mascData.agregarMascota(new Mascota(mascota.getCliente(), nombre, sexoF, especie, raza, colorPelo, fechaLocal, pesoMedio, pesoActual, activo));
+        } else if (hembra && inactivo && codigo != mascota.getIdMascota()) {
+            mascData.agregarMascota(new Mascota(mascota.getCliente(), nombre, sexoF, especie, raza, colorPelo, fechaLocal, pesoMedio, pesoActual, inactivo));
         }
     }//GEN-LAST:event_jbGuardarActionPerformed
 
@@ -676,6 +739,13 @@ public class AgregarMascota extends javax.swing.JInternalFrame {
             evt.consume();
         }
     }//GEN-LAST:event_jtPesoActualKeyTyped
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jrbActivoActionPerformed
+
+    private void jrbInactivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbInactivoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jrbInactivoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

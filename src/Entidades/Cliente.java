@@ -107,5 +107,9 @@ public class Cliente {
     
 
     
+        return "Cliente{" + "idCliente=" + idCliente + ", documento=" + documento + ", cabezaDeFamilia=" + cabezaDeFamilia + ", direccion=" + direccion + ", telefono=" + telefono + ", personaAlternativa=" + personaAlternativa + ", telefonoAlternativo=" + telefonoAlternativo + ", estado=" + estado + '}'+"\n";
+    }
+
+    
     
 }

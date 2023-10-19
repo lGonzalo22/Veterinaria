@@ -431,6 +431,8 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
 
         if (Character.isDigit(c)) {
             evt.consume();          
+        if (Character.isDigit(c)) {//si el caracter es un numero
+            evt.consume();          //no permite escribir
         }
     }//GEN-LAST:event_jtApellidoYNombreKeyTyped
 
@@ -443,6 +445,8 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
 
         if (!Character.isDigit(c)) {
             evt.consume();          
+        if (!Character.isDigit(c)) {//si el caracter no es un numero
+            evt.consume();          //no permite escribir
         }
     }//GEN-LAST:event_jtTelefonoKeyTyped
 
@@ -451,6 +455,8 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
 
         if (Character.isDigit(c)) {
             evt.consume();          
+        if (Character.isDigit(c)) {//si el caracter no es un numero
+            evt.consume();          //no permite escribir
         }
     }//GEN-LAST:event_jtPersonaAlternativaKeyTyped
 
@@ -459,6 +465,8 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
 
         if (!Character.isDigit(c)) {
             evt.consume();          
+        if (!Character.isDigit(c)) {//si el caracter no es un numero
+            evt.consume();          //no permite escribir
         }
     }//GEN-LAST:event_jtTelefonoAlternativoKeyTyped
 
@@ -503,6 +511,8 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
                 jrbInactivo.setSelected(false);
             }
 
+            }
+            
         }
 
 
