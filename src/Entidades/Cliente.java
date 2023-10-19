@@ -1,7 +1,7 @@
 package Entidades;
 
 public class Cliente {
-    
+
     private int idCliente;
     private int documento;
     private String cabezaDeFamilia;
@@ -11,7 +11,7 @@ public class Cliente {
     private int telefonoAlternativo;
     private boolean estado;
 
-    public Cliente(int idCliente, int documento, String cabezaDeFamilia, String direccion, int telefono, String personaAlternativa,int telefonoAlternativo, boolean estado) {
+    public Cliente(int idCliente, int documento, String cabezaDeFamilia, String direccion, int telefono, String personaAlternativa, int telefonoAlternativo, boolean estado) {
         this.idCliente = idCliente;
         this.documento = documento;
         this.cabezaDeFamilia = cabezaDeFamilia;
@@ -21,8 +21,8 @@ public class Cliente {
         this.telefonoAlternativo = telefonoAlternativo;
         this.estado = estado;
     }
-    
-        public Cliente(int documento, String cabezaDeFamilia, String direccion, int telefono, String personaAlternativa, int telefonoAlternativo, boolean estado) {
+
+    public Cliente(int documento, String cabezaDeFamilia, String direccion, int telefono, String personaAlternativa, int telefonoAlternativo, boolean estado) {
         this.documento = documento;
         this.cabezaDeFamilia = cabezaDeFamilia;
         this.direccion = direccion;
@@ -90,7 +90,7 @@ public class Cliente {
     public void setTelefonoAlternativo(int telefonoAlternativo) {
         this.telefonoAlternativo = telefonoAlternativo;
     }
-    
+
     public boolean isEstado() {
         return estado;
     }
@@ -103,13 +103,4 @@ public class Cliente {
     public String toString() {
         return idCliente + ", " + documento + ", " + cabezaDeFamilia;
     }
-
-    
-
-    
-        return "Cliente{" + "idCliente=" + idCliente + ", documento=" + documento + ", cabezaDeFamilia=" + cabezaDeFamilia + ", direccion=" + direccion + ", telefono=" + telefono + ", personaAlternativa=" + personaAlternativa + ", telefonoAlternativo=" + telefonoAlternativo + ", estado=" + estado + '}'+"\n";
-    }
-
-    
-    
 }

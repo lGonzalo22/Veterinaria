@@ -415,22 +415,9 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jbGuardarActionPerformed
 
-    private void jtDocumentoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtDocumentoKeyTyped
-
-        char c = evt.getKeyChar();
-
-        if (!Character.isDigit(c)) {//si el caracter no es un numero
-            evt.consume();          //no permite escribir
-        }
-
-
-    }//GEN-LAST:event_jtDocumentoKeyTyped
-
     private void jtApellidoYNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtApellidoYNombreKeyTyped
         char c = evt.getKeyChar();
-
-        if (Character.isDigit(c)) {
-            evt.consume();          
+       
         if (Character.isDigit(c)) {//si el caracter es un numero
             evt.consume();          //no permite escribir
         }
@@ -442,9 +429,7 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
 
     private void jtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtTelefonoKeyTyped
         char c = evt.getKeyChar();
-
-        if (!Character.isDigit(c)) {
-            evt.consume();          
+        
         if (!Character.isDigit(c)) {//si el caracter no es un numero
             evt.consume();          //no permite escribir
         }
@@ -452,9 +437,7 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
 
     private void jtPersonaAlternativaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtPersonaAlternativaKeyTyped
         char c = evt.getKeyChar();
-
-        if (Character.isDigit(c)) {
-            evt.consume();          
+         
         if (Character.isDigit(c)) {//si el caracter no es un numero
             evt.consume();          //no permite escribir
         }
@@ -463,11 +446,11 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
     private void jtTelefonoAlternativoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtTelefonoAlternativoKeyTyped
         char c = evt.getKeyChar();
 
-        if (!Character.isDigit(c)) {
-            evt.consume();          
+                
         if (!Character.isDigit(c)) {//si el caracter no es un numero
             evt.consume();          //no permite escribir
         }
+        
     }//GEN-LAST:event_jtTelefonoAlternativoKeyTyped
 
     private void jrbInactivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbInactivoActionPerformed
@@ -513,10 +496,20 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
 
             }
             
-        }
+        
 
 
     }//GEN-LAST:event_jbEliminarActionPerformed
+
+    private void jtDocumentoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtDocumentoKeyTyped
+
+        char c = evt.getKeyChar();
+
+        if (!Character.isDigit(c)) {//si el caracter no es un numero
+            evt.consume();          //no permite escribir
+        }
+
+    }//GEN-LAST:event_jtDocumentoKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -544,3 +537,4 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtTelefonoAlternativo;
     // End of variables declaration//GEN-END:variables
 }
+
