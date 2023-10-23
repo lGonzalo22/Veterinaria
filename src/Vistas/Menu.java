@@ -104,6 +104,11 @@ public class Menu extends javax.swing.JFrame {
         jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Imagenes/veterinario (1).png"))); // NOI18N
 
         jMenuItem7.setText("Agregar Tratamiento");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem7);
 
         jMenuItem8.setText("Listado Tratamientos");
@@ -193,6 +198,19 @@ public class Menu extends javax.swing.JFrame {
         escritorio.add(mascota);
         escritorio.moveToFront(mascota);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        
+         escritorio.removeAll();
+        escritorio.repaint();
+        
+        AgregarTratamiento tratamiento = new AgregarTratamiento();
+        
+        tratamiento.setVisible(true);
+        escritorio.add(tratamiento);
+        escritorio.moveToFront(tratamiento);
+        
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     /**
      * @param args the command line arguments

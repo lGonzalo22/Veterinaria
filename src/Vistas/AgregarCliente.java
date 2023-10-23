@@ -356,21 +356,37 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Llene los espacios vacios.");
         } else {
 
-            int documento = Integer.parseInt(jtDocumento.getText());
+            int documento = Integer.parseInt(jtDocumento.getText().trim());
             String apellidoYNombre = jtApellidoYNombre.getText();
-            String direccion = jtDireccion.getText();
-            int telefono = Integer.parseInt(jtTelefono.getText());
+            String direccion = jtDireccion.getText();    
+            long telefono = Long.parseLong(jtTelefono.getText().trim()); // .trim() = Eliminar espacios en blanco antes y después
             String personaAlternativa = jtPersonaAlternativa.getText();
-            int telefonoAlternativo = Integer.parseInt(jtTelefonoAlternativo.getText());
+            long telefonoAlternativo = Long.parseLong(jtTelefonoAlternativo.getText().trim());
             boolean activo = jrbActivo.isSelected();
             boolean inactivo = jrbInactivo.isSelected();
 
             cliente = clienData.buscarClientePorDni(documento);
 
-            if (activo && documento != cliente.getDocumento()) {
+            if (activo && cliente == null) {
                 clienData.agregarCliente(new Cliente(documento, apellidoYNombre, direccion, telefono, personaAlternativa, telefonoAlternativo, activo));
-            } else if (inactivo && documento != cliente.getDocumento()) {
+                jtDocumento.setText("");
+                jtApellidoYNombre.setText("");
+                jtDireccion.setText("");
+                jtTelefono.setText("");
+                jtPersonaAlternativa.setText("");
+                jtTelefonoAlternativo.setText("");
+                jrbActivo.setSelected(false);
+                jrbInactivo.setSelected(false);
+            } else if (inactivo && cliente == null) {
                 clienData.agregarCliente(new Cliente(documento, apellidoYNombre, direccion, telefono, personaAlternativa, telefonoAlternativo, inactivo));
+                jtDocumento.setText("");
+                jtApellidoYNombre.setText("");
+                jtDireccion.setText("");
+                jtTelefono.setText("");
+                jtPersonaAlternativa.setText("");
+                jtTelefonoAlternativo.setText("");
+                jrbActivo.setSelected(false);
+                jrbInactivo.setSelected(false);
             }
 
             if (cliente != null) {
@@ -417,7 +433,7 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
 
     private void jtApellidoYNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtApellidoYNombreKeyTyped
         char c = evt.getKeyChar();
-       
+
         if (Character.isDigit(c)) {//si el caracter es un numero
             evt.consume();          //no permite escribir
         }
@@ -429,7 +445,7 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
 
     private void jtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtTelefonoKeyTyped
         char c = evt.getKeyChar();
-        
+
         if (!Character.isDigit(c)) {//si el caracter no es un numero
             evt.consume();          //no permite escribir
         }
@@ -437,7 +453,7 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
 
     private void jtPersonaAlternativaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtPersonaAlternativaKeyTyped
         char c = evt.getKeyChar();
-         
+
         if (Character.isDigit(c)) {//si el caracter no es un numero
             evt.consume();          //no permite escribir
         }
@@ -446,11 +462,10 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
     private void jtTelefonoAlternativoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtTelefonoAlternativoKeyTyped
         char c = evt.getKeyChar();
 
-                
         if (!Character.isDigit(c)) {//si el caracter no es un numero
             evt.consume();          //no permite escribir
         }
-        
+
     }//GEN-LAST:event_jtTelefonoAlternativoKeyTyped
 
     private void jrbInactivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbInactivoActionPerformed
@@ -494,9 +509,7 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
                 jrbInactivo.setSelected(false);
             }
 
-            }
-            
-        
+        }
 
 
     }//GEN-LAST:event_jbEliminarActionPerformed
@@ -537,4 +550,3 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtTelefonoAlternativo;
     // End of variables declaration//GEN-END:variables
 }
-

@@ -5,17 +5,26 @@
  */
 package Vistas;
 
+import AccesoADatos.TratamientoData;
+import Entidades.TiposTratamientos;
+import Entidades.Tratamiento;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author gonza
  */
 public class AgregarTratamiento extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form AgregarTratamiento
-     */
+    private TratamientoData tratData = new TratamientoData();
+    private Tratamiento tratamiento = null;
+    private double importe = 0;
+    private double importeIngresado = 0;
+    boolean tf = true;
+
     public AgregarTratamiento() {
         initComponents();
+        cargarCombo();
     }
 
     /**
@@ -34,21 +43,21 @@ public class AgregarTratamiento extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jtDocumento = new javax.swing.JTextField();
-        jtApellido1 = new javax.swing.JTextField();
+        jtCodigo = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jTextField1 = new javax.swing.JTextField();
-        jRadioButton4 = new javax.swing.JRadioButton();
-        jRadioButton5 = new javax.swing.JRadioButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jtaDescripcion = new javax.swing.JTextArea();
+        jrbTarjeta = new javax.swing.JRadioButton();
+        jrbEfectivo = new javax.swing.JRadioButton();
+        jtImporte = new javax.swing.JTextField();
+        jrbActivo = new javax.swing.JRadioButton();
+        jrbInactivo = new javax.swing.JRadioButton();
+        jbSalir = new javax.swing.JButton();
+        jbGuardar = new javax.swing.JButton();
+        jbEliminar = new javax.swing.JButton();
+        jbNuevo = new javax.swing.JButton();
+        jbBuscar = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
+        jcbTipo = new javax.swing.JComboBox<>();
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 255));
 
@@ -76,72 +85,97 @@ public class AgregarTratamiento extends javax.swing.JInternalFrame {
         jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Estado:");
 
-        jtDocumento.setBackground(new java.awt.Color(255, 255, 255));
-        jtDocumento.setForeground(new java.awt.Color(0, 0, 0));
+        jtCodigo.setBackground(new java.awt.Color(255, 255, 255));
+        jtCodigo.setForeground(new java.awt.Color(0, 0, 0));
 
-        jtApellido1.setBackground(new java.awt.Color(255, 255, 255));
-        jtApellido1.setForeground(new java.awt.Color(0, 0, 0));
+        jtaDescripcion.setBackground(new java.awt.Color(255, 255, 255));
+        jtaDescripcion.setColumns(20);
+        jtaDescripcion.setForeground(new java.awt.Color(0, 0, 0));
+        jtaDescripcion.setLineWrap(true);
+        jtaDescripcion.setRows(5);
+        jScrollPane1.setViewportView(jtaDescripcion);
 
-        jTextArea1.setBackground(new java.awt.Color(255, 255, 255));
-        jTextArea1.setColumns(20);
-        jTextArea1.setForeground(new java.awt.Color(0, 0, 0));
-        jTextArea1.setLineWrap(true);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
-
-        jRadioButton3.setBackground(new java.awt.Color(204, 204, 255));
-        jRadioButton3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jRadioButton3.setForeground(new java.awt.Color(0, 0, 0));
-        jRadioButton3.setText("Tarjeta/otro");
-        jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
+        jrbTarjeta.setBackground(new java.awt.Color(204, 204, 255));
+        jrbTarjeta.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jrbTarjeta.setForeground(new java.awt.Color(0, 0, 0));
+        jrbTarjeta.setText("Tarjeta/otro");
+        jrbTarjeta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton3ActionPerformed(evt);
+                jrbTarjetaActionPerformed(evt);
             }
         });
 
-        jRadioButton2.setBackground(new java.awt.Color(204, 204, 255));
-        jRadioButton2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jRadioButton2.setForeground(new java.awt.Color(0, 0, 0));
-        jRadioButton2.setText("Efectivo");
-
-        jTextField1.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(0, 0, 0));
-
-        jRadioButton4.setBackground(new java.awt.Color(204, 204, 255));
-        jRadioButton4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jRadioButton4.setForeground(new java.awt.Color(0, 0, 0));
-        jRadioButton4.setText("Activo");
-
-        jRadioButton5.setBackground(new java.awt.Color(204, 204, 255));
-        jRadioButton5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jRadioButton5.setForeground(new java.awt.Color(0, 0, 0));
-        jRadioButton5.setText("Inactivo");
-        jRadioButton5.addActionListener(new java.awt.event.ActionListener() {
+        jrbEfectivo.setBackground(new java.awt.Color(204, 204, 255));
+        jrbEfectivo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jrbEfectivo.setForeground(new java.awt.Color(0, 0, 0));
+        jrbEfectivo.setText("Efectivo");
+        jrbEfectivo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton5ActionPerformed(evt);
+                jrbEfectivoActionPerformed(evt);
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jButton2.setText("Salir");
+        jtImporte.setBackground(new java.awt.Color(255, 255, 255));
+        jtImporte.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jtImporte.setForeground(new java.awt.Color(0, 0, 0));
 
-        jButton3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jButton3.setText("Guardar");
+        jrbActivo.setBackground(new java.awt.Color(204, 204, 255));
+        jrbActivo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jrbActivo.setForeground(new java.awt.Color(0, 0, 0));
+        jrbActivo.setText("Activo");
+        jrbActivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbActivoActionPerformed(evt);
+            }
+        });
 
-        jButton4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jButton4.setText("Eliminar");
+        jrbInactivo.setBackground(new java.awt.Color(204, 204, 255));
+        jrbInactivo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jrbInactivo.setForeground(new java.awt.Color(0, 0, 0));
+        jrbInactivo.setText("Inactivo");
+        jrbInactivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbInactivoActionPerformed(evt);
+            }
+        });
 
-        jButton5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jButton5.setText("Nuevo");
+        jbSalir.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jbSalir.setText("Salir");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
 
-        jButton1.setBackground(new java.awt.Color(204, 204, 255));
-        jButton1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Imagenes/lupa (2).png"))); // NOI18N
+        jbGuardar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jbGuardar.setText("Guardar");
+        jbGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGuardarActionPerformed(evt);
+            }
+        });
+
+        jbEliminar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jbEliminar.setText("Eliminar");
+
+        jbNuevo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jbNuevo.setText("Nuevo");
+
+        jbBuscar.setBackground(new java.awt.Color(204, 204, 255));
+        jbBuscar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jbBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Imagenes/lupa (2).png"))); // NOI18N
+        jbBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBuscarActionPerformed(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("$");
+
+        jcbTipo.setBackground(new java.awt.Color(255, 255, 255));
+        jcbTipo.setForeground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -159,11 +193,11 @@ public class AgregarTratamiento extends javax.swing.JInternalFrame {
                             .addComponent(jLabel1)
                             .addComponent(jLabel3))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jtApellido1)
-                            .addComponent(jtDocumento, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jtCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
+                            .addComponent(jcbTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1))
+                        .addComponent(jbBuscar))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
@@ -171,26 +205,26 @@ public class AgregarTratamiento extends javax.swing.JInternalFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addComponent(jRadioButton4)
+                                .addComponent(jrbActivo)
                                 .addGap(18, 18, 18)
-                                .addComponent(jRadioButton5))
+                                .addComponent(jrbInactivo))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel7)
                                 .addGap(2, 2, 2)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jtImporte, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(12, 12, 12)
-                                .addComponent(jRadioButton2)
+                                .addComponent(jrbEfectivo)
                                 .addGap(18, 18, 18)
-                                .addComponent(jRadioButton3))))
+                                .addComponent(jrbTarjeta))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton5)
+                        .addComponent(jbNuevo)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton4)
+                        .addComponent(jbEliminar)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton3)
+                        .addComponent(jbGuardar)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(84, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -207,15 +241,15 @@ public class AgregarTratamiento extends javax.swing.JInternalFrame {
                         .addGap(32, 32, 32)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(jtDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(15, 15, 15))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)
+                        .addComponent(jbBuscar)
                         .addGap(7, 7, 7)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jtApellido1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -223,21 +257,21 @@ public class AgregarTratamiento extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jRadioButton2)
-                    .addComponent(jRadioButton3)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jrbEfectivo)
+                    .addComponent(jrbTarjeta)
+                    .addComponent(jtImporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jRadioButton4)
-                    .addComponent(jRadioButton5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                    .addComponent(jrbActivo)
+                    .addComponent(jrbInactivo))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4)
-                    .addComponent(jButton5))
+                    .addComponent(jbSalir)
+                    .addComponent(jbGuardar)
+                    .addComponent(jbEliminar)
+                    .addComponent(jbNuevo))
                 .addGap(18, 18, 18))
         );
 
@@ -255,21 +289,175 @@ public class AgregarTratamiento extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton3ActionPerformed
+    private void jrbTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbTarjetaActionPerformed
+        
+        if (jrbTarjeta.isSelected() && tratamiento != null) {
+            jrbEfectivo.setSelected(false);
+            jtImporte.setText(tratamiento.getImporte() + "");
+        } else if (jrbTarjeta.isSelected() && tratamiento == null) {
+            if (!tf) {
+                importe = Double.parseDouble(jtImporte.getText());
+                double descuento = (10 * importe) / 100;
+                double importeTotal = importe + descuento;
+                jtImporte.setText(importeTotal + "");
+                tf = true;
+            }
 
-    private void jRadioButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton5ActionPerformed
+        }
+
+
+    }//GEN-LAST:event_jrbTarjetaActionPerformed
+
+    private void jrbInactivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbInactivoActionPerformed
+        if (jrbInactivo.isSelected()) {
+            jrbActivo.setSelected(false);
+        }
+    }//GEN-LAST:event_jrbInactivoActionPerformed
+
+    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
+
+        int codigo = Integer.parseInt(jtCodigo.getText());
+
+        tratamiento = tratData.buscarTratamiento(codigo);
+
+        if (tratamiento != null) {
+            int op = JOptionPane.showConfirmDialog(this, "Tramiento encontrado. Desea cargarlo?");
+            if (op == 0) {
+                jcbTipo.setSelectedItem(tratamiento.getTipo());
+
+                jtaDescripcion.setText(tratamiento.getDescripcion());
+                jtImporte.setText(tratamiento.getImporte() + "");
+                jtImporte.setEditable(false);
+                jrbTarjeta.setSelected(true);
+                if (tratamiento.isEstado()) {
+                    jrbActivo.setSelected(true);
+                } else {
+                    jrbInactivo.setSelected(true);
+                }
+            } else {
+
+                jtCodigo.setText("");
+                jcbTipo.setSelectedItem(null);
+                jtImporte.setText("");
+                jtaDescripcion.setText("");
+                jrbTarjeta.setSelected(false);
+                jrbActivo.setSelected(false);
+                jrbInactivo.setSelected(false);
+
+            }
+        } else {
+            jtImporte.setEditable(true);
+        }
+
+    }//GEN-LAST:event_jbBuscarActionPerformed
+
+    private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
+
+        if (jtCodigo.getText().isEmpty() || jcbTipo.getSelectedItem() == null || jtaDescripcion.getText().isEmpty() || jtImporte.getText().isEmpty()) {
+
+        }
+
+        int codigo = Integer.parseInt(jtCodigo.getText());
+        TiposTratamientos tipos = (TiposTratamientos) jcbTipo.getSelectedItem();
+        String descripcion = jtaDescripcion.getText();
+        importe = Double.parseDouble(jtImporte.getText());
+        boolean activo = jrbActivo.isSelected();
+        boolean inactivo = jrbInactivo.isSelected();
+
+        tratamiento = tratData.buscarTratamiento(codigo);
+
+        if (activo && tratamiento == null) {
+            tratData.agregarTratamiento(new Tratamiento(tipos, descripcion, importe, activo));
+            jtCodigo.setText("");
+            jcbTipo.setSelectedItem(null);
+            jtImporte.setText("");
+            jtaDescripcion.setText("");
+            jrbTarjeta.setSelected(false);
+            jrbActivo.setSelected(false);
+            jrbInactivo.setSelected(false);
+        } else if (inactivo && tratamiento == null) {
+            tratData.agregarTratamiento(new Tratamiento(tipos, descripcion, importe, inactivo));
+            jtCodigo.setText("");
+            jcbTipo.setSelectedItem(null);
+            jtImporte.setText("");
+            jtaDescripcion.setText("");
+            jrbTarjeta.setSelected(false);
+            jrbActivo.setSelected(false);
+            jrbInactivo.setSelected(false);
+        }
+
+//        if (tratamiento != null) {
+//            tratamiento.setTipo(tipos);
+//            tratamiento.setDescripcion(descripcion);
+//            tratamiento.setImporte(importe);
+//            if (activo) {
+//                tratamiento.setEstado(true);
+//            } else {
+//                tratamiento.setEstado(false);
+//            }
+//            int op = JOptionPane.showConfirmDialog(this, "El tratamiento ya existe. Quiere modificarlo?");
+//            if (op == 0) {
+//                tratData.modificarTratamiento(tratamiento);
+//                jtCodigo.setText("");
+//                jcbTipo.setSelectedItem(null);
+//                jtImporte.setText("");
+//                jtaDescripcion.setText("");
+//                jrbTarjeta.setSelected(false);
+//                jrbActivo.setSelected(false);
+//                jrbInactivo.setSelected(false);
+//            } else {
+//                jtCodigo.setText("");
+//                jcbTipo.setSelectedItem(null);
+//                jtImporte.setText("");
+//                jtaDescripcion.setText("");
+//                jrbTarjeta.setSelected(false);
+//                jrbActivo.setSelected(false);
+//                jrbInactivo.setSelected(false);
+//            }
+//                jtCodigo.setText("");
+//                jcbTipo.setSelectedItem(null);
+//                jtImporte.setText("");
+//                jtaDescripcion.setText("");
+//                jrbTarjeta.setSelected(false);
+//                jrbActivo.setSelected(false);
+//                jrbInactivo.setSelected(false);
+//        }
+
+    }//GEN-LAST:event_jbGuardarActionPerformed
+
+    private void jrbEfectivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbEfectivoActionPerformed
+
+        if (jrbEfectivo.isSelected() && tratamiento != null) {
+            jrbTarjeta.setSelected(false);
+            importe = tratData.importeContado(tratamiento);
+            jtImporte.setText(importe + "");
+        } else if (jrbEfectivo.isSelected() && tratamiento == null) {
+
+            if (tf) {
+                importe = Double.parseDouble(jtImporte.getText());
+                double descuento = (10 * importe) / 100;
+                double importeTotal = importe - descuento;
+                jtImporte.setText(importeTotal + "");
+                tf = false;
+            }
+
+        }
+
+
+    }//GEN-LAST:event_jrbEfectivoActionPerformed
+
+    private void jrbActivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbActivoActionPerformed
+        if (jrbActivo.isSelected()) {
+            jrbInactivo.setSelected(false);
+        }
+    }//GEN-LAST:event_jrbActivoActionPerformed
+
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jbSalirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -278,14 +466,32 @@ public class AgregarTratamiento extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JRadioButton jRadioButton5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jtApellido1;
-    private javax.swing.JTextField jtDocumento;
+    private javax.swing.JButton jbBuscar;
+    private javax.swing.JButton jbEliminar;
+    private javax.swing.JButton jbGuardar;
+    private javax.swing.JButton jbNuevo;
+    private javax.swing.JButton jbSalir;
+    private javax.swing.JComboBox<TiposTratamientos> jcbTipo;
+    private javax.swing.JRadioButton jrbActivo;
+    private javax.swing.JRadioButton jrbEfectivo;
+    private javax.swing.JRadioButton jrbInactivo;
+    private javax.swing.JRadioButton jrbTarjeta;
+    private javax.swing.JTextField jtCodigo;
+    private javax.swing.JTextField jtImporte;
+    private javax.swing.JTextArea jtaDescripcion;
     // End of variables declaration//GEN-END:variables
+
+    public void cargarCombo() {
+        jcbTipo.addItem(null);
+        jcbTipo.addItem(TiposTratamientos.BAÑOYCORTE);
+        jcbTipo.addItem(TiposTratamientos.CIRUGIA);
+        jcbTipo.addItem(TiposTratamientos.CONTROL);
+        jcbTipo.addItem(TiposTratamientos.CURACIONES);
+        jcbTipo.addItem(TiposTratamientos.ENFERMEDAD);
+        jcbTipo.addItem(TiposTratamientos.MEDICACION);
+        jcbTipo.addItem(TiposTratamientos.URGENCIA);
+        jcbTipo.addItem(TiposTratamientos.VACUNACION);
+
+    }
 }

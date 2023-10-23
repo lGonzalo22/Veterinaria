@@ -6,12 +6,12 @@ public class Cliente {
     private int documento;
     private String cabezaDeFamilia;
     private String direccion;
-    private int telefono;
+    private long telefono;
     private String personaAlternativa;
-    private int telefonoAlternativo;
+    private long telefonoAlternativo;
     private boolean estado;
 
-    public Cliente(int idCliente, int documento, String cabezaDeFamilia, String direccion, int telefono, String personaAlternativa, int telefonoAlternativo, boolean estado) {
+    public Cliente(int idCliente, int documento, String cabezaDeFamilia, String direccion, long telefono, String personaAlternativa, long telefonoAlternativo, boolean estado) {
         this.idCliente = idCliente;
         this.documento = documento;
         this.cabezaDeFamilia = cabezaDeFamilia;
@@ -22,7 +22,7 @@ public class Cliente {
         this.estado = estado;
     }
 
-    public Cliente(int documento, String cabezaDeFamilia, String direccion, int telefono, String personaAlternativa, int telefonoAlternativo, boolean estado) {
+    public Cliente(int documento, String cabezaDeFamilia, String direccion, long telefono, String personaAlternativa, long telefonoAlternativo, boolean estado) {
         this.documento = documento;
         this.cabezaDeFamilia = cabezaDeFamilia;
         this.direccion = direccion;
@@ -67,11 +67,11 @@ public class Cliente {
         this.direccion = direccion;
     }
 
-    public int getTelefono() {
+    public long getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(long telefono) {
         this.telefono = telefono;
     }
 
@@ -83,11 +83,11 @@ public class Cliente {
         this.personaAlternativa = personaAlternativa;
     }
 
-    public int getTelefonoAlternativo() {
+    public long getTelefonoAlternativo() {
         return telefonoAlternativo;
     }
 
-    public void setTelefonoAlternativo(int telefonoAlternativo) {
+    public void setTelefonoAlternativo(long telefonoAlternativo) {
         this.telefonoAlternativo = telefonoAlternativo;
     }
 

@@ -27,9 +27,9 @@ public class ClienteData {
             ps.setInt(1, cliente.getDocumento());
             ps.setString(2, cliente.getCabezaDeFamilia());
             ps.setString(3, cliente.getDireccion());
-            ps.setInt(4, cliente.getTelefono());
+            ps.setLong(4, cliente.getTelefono());
             ps.setString(5, cliente.getPersonaAlternativa());
-            ps.setInt(6, cliente.getTelefonoAlternativo());
+            ps.setLong(6, cliente.getTelefonoAlternativo());
             ps.setBoolean(7, cliente.isEstado());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
@@ -70,9 +70,9 @@ public class ClienteData {
             ps.setInt(1, cliente.getDocumento());
             ps.setString(2, cliente.getCabezaDeFamilia());
             ps.setString(3, cliente.getDireccion());
-            ps.setInt(4, cliente.getTelefono());
+            ps.setLong(4, cliente.getTelefono());
             ps.setString(5, cliente.getPersonaAlternativa());
-            ps.setInt(6, cliente.getTelefonoAlternativo());
+            ps.setLong(6, cliente.getTelefonoAlternativo());
             ps.setBoolean(7, cliente.isEstado());
             ps.setInt(8, cliente.getIdCliente());
             int correcto = ps.executeUpdate();

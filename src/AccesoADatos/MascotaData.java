@@ -70,6 +70,25 @@ public class MascotaData {
             JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
         }
     }
+    
+        public void activarMascota(int id) {
+
+        String sql = "UPDATE mascota SET estado = 1 WHERE idMascota = ? and estado = 0";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            int correcto = ps.executeUpdate();
+            if (correcto == 1) {
+                JOptionPane.showMessageDialog(null, "Mascota activada con exito.");
+            } else {
+                JOptionPane.showMessageDialog(null, "La mascota no existe.");
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
+        }
+    }
 
     public void modificarMascota(Mascota mascota) {
         String sql = "UPDATE mascota SET idCliente = ?, nombre = ?, sexo = ?, especie = ?, raza = ?, colorPelo = ?, fechaNac = ?, pesoMedio = ?, pesoActual = ?, estado = ? WHERE idMascota = ?";
@@ -135,7 +154,7 @@ public class MascotaData {
 
         ArrayList<Mascota> mascotas = new ArrayList();
 
-        String sql = "SELECT * FROM mascota WHERE estado = 1";
+        String sql = "SELECT * FROM mascota";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -168,7 +187,7 @@ public class MascotaData {
 
         ArrayList<Mascota> mascotas = new ArrayList();
 
-        String sql = "SELECT * FROM mascota WHERE idCliente = ? AND estado = 1";
+        String sql = "SELECT * FROM mascota WHERE idCliente = ?";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
