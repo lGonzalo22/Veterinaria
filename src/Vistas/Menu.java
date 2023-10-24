@@ -112,6 +112,11 @@ public class Menu extends javax.swing.JFrame {
         jMenu5.add(jMenuItem7);
 
         jMenuItem8.setText("Listado Tratamientos");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem8);
 
         jMenuItem11.setText("Tratamientos por tipo");
@@ -211,6 +216,17 @@ public class Menu extends javax.swing.JFrame {
         escritorio.moveToFront(tratamiento);
         
     }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+         escritorio.removeAll();
+        escritorio.repaint();
+        
+        ListadoTratamientos tratamiento = new ListadoTratamientos();
+        
+        tratamiento.setVisible(true);
+        escritorio.add(tratamiento);
+        escritorio.moveToFront(tratamiento);
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     /**
      * @param args the command line arguments

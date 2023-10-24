@@ -64,6 +64,25 @@ public class TratamientoData {
         }
     }
     
+        public void activarTratamiento(int id) {
+
+        String sql = "UPDATE tratamiento SET activo = 1 WHERE idTratamiento = ? and activo = 0";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            int correcto = ps.executeUpdate();
+            if (correcto == 1) {
+                JOptionPane.showMessageDialog(null, "Tratamiento activado.");
+            } else {
+                JOptionPane.showMessageDialog(null, "El tratamiento no existe.");
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
+        }
+    }
+    
     public void modificarTratamiento(Tratamiento trat){
         
         String sql = "UPDATE tratamiento SET tipo = ?, descripcion = ?, importe = ?, activo = ? WHERE idTratamiento = ?";
@@ -75,6 +94,26 @@ public class TratamientoData {
             ps.setDouble(3, trat.getImporte());
             ps.setBoolean(4, trat.isEstado());
             ps.setInt(5, trat.getIdTratamiento());
+            int correcto = ps.executeUpdate();
+            if (correcto == 1) {
+                JOptionPane.showMessageDialog(null, "Tratamiento modificado correctamente.");
+            }else{
+                JOptionPane.showMessageDialog(null, "El tratamiento no existe.");
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
+        }
+    }
+    
+        public void modificarDescripcionTratamiento(int id, String descripcion){
+        
+        String sql = "UPDATE tratamiento SET descripcion = ? WHERE idTratamiento = ?";
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, descripcion);
+            ps.setInt(2, id);
             int correcto = ps.executeUpdate();
             if (correcto == 1) {
                 JOptionPane.showMessageDialog(null, "Tratamiento modificado correctamente.");

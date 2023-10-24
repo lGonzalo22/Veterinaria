@@ -19,12 +19,13 @@ public class AgregarTratamiento extends javax.swing.JInternalFrame {
     private TratamientoData tratData = new TratamientoData();
     private Tratamiento tratamiento = null;
     private double importe = 0;
-    private double importeIngresado = 0;
-    boolean tf = true;
+    private double importe2 = 0;
 
     public AgregarTratamiento() {
         initComponents();
         cargarCombo();
+        jrbTarjeta.setSelected(true);
+
     }
 
     /**
@@ -53,9 +54,7 @@ public class AgregarTratamiento extends javax.swing.JInternalFrame {
         jrbInactivo = new javax.swing.JRadioButton();
         jbSalir = new javax.swing.JButton();
         jbGuardar = new javax.swing.JButton();
-        jbEliminar = new javax.swing.JButton();
         jbNuevo = new javax.swing.JButton();
-        jbBuscar = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jcbTipo = new javax.swing.JComboBox<>();
 
@@ -87,12 +86,22 @@ public class AgregarTratamiento extends javax.swing.JInternalFrame {
 
         jtCodigo.setBackground(new java.awt.Color(255, 255, 255));
         jtCodigo.setForeground(new java.awt.Color(0, 0, 0));
+        jtCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtCodigoKeyTyped(evt);
+            }
+        });
 
         jtaDescripcion.setBackground(new java.awt.Color(255, 255, 255));
         jtaDescripcion.setColumns(20);
         jtaDescripcion.setForeground(new java.awt.Color(0, 0, 0));
         jtaDescripcion.setLineWrap(true);
         jtaDescripcion.setRows(5);
+        jtaDescripcion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtaDescripcionKeyTyped(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtaDescripcion);
 
         jrbTarjeta.setBackground(new java.awt.Color(204, 204, 255));
@@ -118,6 +127,16 @@ public class AgregarTratamiento extends javax.swing.JInternalFrame {
         jtImporte.setBackground(new java.awt.Color(255, 255, 255));
         jtImporte.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jtImporte.setForeground(new java.awt.Color(0, 0, 0));
+        jtImporte.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtImporteFocusLost(evt);
+            }
+        });
+        jtImporte.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtImporteKeyTyped(evt);
+            }
+        });
 
         jrbActivo.setBackground(new java.awt.Color(204, 204, 255));
         jrbActivo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -155,18 +174,11 @@ public class AgregarTratamiento extends javax.swing.JInternalFrame {
             }
         });
 
-        jbEliminar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jbEliminar.setText("Eliminar");
-
         jbNuevo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jbNuevo.setText("Nuevo");
-
-        jbBuscar.setBackground(new java.awt.Color(204, 204, 255));
-        jbBuscar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jbBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Imagenes/lupa (2).png"))); // NOI18N
-        jbBuscar.addActionListener(new java.awt.event.ActionListener() {
+        jbNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbBuscarActionPerformed(evt);
+                jbNuevoActionPerformed(evt);
             }
         });
 
@@ -189,25 +201,19 @@ public class AgregarTratamiento extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(42, 42, 42)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel3))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jtCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
-                            .addComponent(jcbTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbBuscar))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jcbTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jtCodigo)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
                             .addComponent(jLabel5))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jrbActivo)
-                                .addGap(18, 18, 18)
-                                .addComponent(jrbInactivo))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel7)
@@ -216,15 +222,20 @@ public class AgregarTratamiento extends javax.swing.JInternalFrame {
                                 .addGap(12, 12, 12)
                                 .addComponent(jrbEfectivo)
                                 .addGap(18, 18, 18)
-                                .addComponent(jrbTarjeta))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jbNuevo)
-                        .addGap(18, 18, 18)
-                        .addComponent(jbEliminar)
-                        .addGap(18, 18, 18)
-                        .addComponent(jbGuardar)
-                        .addGap(18, 18, 18)
-                        .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jrbTarjeta))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jbNuevo)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jbGuardar)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jrbActivo)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jrbInactivo)))))))
                 .addContainerGap(84, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -236,17 +247,11 @@ public class AgregarTratamiento extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(jLabel2)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(jtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(15, 15, 15))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jbBuscar)
-                        .addGap(7, 7, 7)))
+                .addGap(32, 32, 32)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jcbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -266,13 +271,12 @@ public class AgregarTratamiento extends javax.swing.JInternalFrame {
                     .addComponent(jLabel6)
                     .addComponent(jrbActivo)
                     .addComponent(jrbInactivo))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbSalir)
                     .addComponent(jbGuardar)
-                    .addComponent(jbEliminar)
                     .addComponent(jbNuevo))
-                .addGap(18, 18, 18))
+                .addGap(24, 24, 24))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -290,18 +294,13 @@ public class AgregarTratamiento extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jrbTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbTarjetaActionPerformed
-        
+
         if (jrbTarjeta.isSelected() && tratamiento != null) {
             jrbEfectivo.setSelected(false);
             jtImporte.setText(tratamiento.getImporte() + "");
         } else if (jrbTarjeta.isSelected() && tratamiento == null) {
-            if (!tf) {
-                importe = Double.parseDouble(jtImporte.getText());
-                double descuento = (10 * importe) / 100;
-                double importeTotal = importe + descuento;
-                jtImporte.setText(importeTotal + "");
-                tf = true;
-            }
+            jrbEfectivo.setSelected(false);
+            jtImporte.setText(importe2 + "");
 
         }
 
@@ -314,76 +313,43 @@ public class AgregarTratamiento extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jrbInactivoActionPerformed
 
-    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
+    private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
 
-        int codigo = Integer.parseInt(jtCodigo.getText());
+        if (jtCodigo.getText().isEmpty() || jcbTipo.getSelectedItem() == null || jtaDescripcion.getText().isEmpty() || jtImporte.getText().isEmpty() || (!jrbActivo.isSelected() && !jrbInactivo.isSelected())) {
+            JOptionPane.showMessageDialog(this, "Llene los espacios vacios.");
+        } else {
+            int codigo = Integer.parseInt(jtCodigo.getText());
+            TiposTratamientos tipos = (TiposTratamientos) jcbTipo.getSelectedItem();
+            String descripcion = jtaDescripcion.getText();
+            importe = Double.parseDouble(jtImporte.getText());
+            boolean activo = jrbActivo.isSelected();
+            boolean inactivo = jrbInactivo.isSelected();
 
-        tratamiento = tratData.buscarTratamiento(codigo);
+            tratamiento = tratData.buscarTratamiento(codigo);
 
-        if (tratamiento != null) {
-            int op = JOptionPane.showConfirmDialog(this, "Tramiento encontrado. Desea cargarlo?");
-            if (op == 0) {
-                jcbTipo.setSelectedItem(tratamiento.getTipo());
-
-                jtaDescripcion.setText(tratamiento.getDescripcion());
-                jtImporte.setText(tratamiento.getImporte() + "");
-                jtImporte.setEditable(false);
-                jrbTarjeta.setSelected(true);
-                if (tratamiento.isEstado()) {
-                    jrbActivo.setSelected(true);
-                } else {
-                    jrbInactivo.setSelected(true);
-                }
-            } else {
-
+            if (activo && tratamiento == null) {
+                tratData.agregarTratamiento(new Tratamiento(tipos, descripcion, importe, activo));
                 jtCodigo.setText("");
                 jcbTipo.setSelectedItem(null);
                 jtImporte.setText("");
                 jtaDescripcion.setText("");
-                jrbTarjeta.setSelected(false);
+                jrbTarjeta.setSelected(true);
+                jrbEfectivo.setSelected(false);
                 jrbActivo.setSelected(false);
                 jrbInactivo.setSelected(false);
-
+            } else if (inactivo && tratamiento == null) {
+                tratData.agregarTratamiento(new Tratamiento(tipos, descripcion, importe, inactivo));
+                jtCodigo.setText("");
+                jcbTipo.setSelectedItem(null);
+                jtImporte.setText("");
+                jtaDescripcion.setText("");
+                jrbTarjeta.setSelected(true);
+                jrbEfectivo.setSelected(false);
+                jrbActivo.setSelected(false);
+                jrbInactivo.setSelected(false);
+            }else{
+                JOptionPane.showMessageDialog(this, "El tratamiento ya existe. Si desea modificarlo vaya al listado de tratamiento.");
             }
-        } else {
-            jtImporte.setEditable(true);
-        }
-
-    }//GEN-LAST:event_jbBuscarActionPerformed
-
-    private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
-
-        if (jtCodigo.getText().isEmpty() || jcbTipo.getSelectedItem() == null || jtaDescripcion.getText().isEmpty() || jtImporte.getText().isEmpty()) {
-
-        }
-
-        int codigo = Integer.parseInt(jtCodigo.getText());
-        TiposTratamientos tipos = (TiposTratamientos) jcbTipo.getSelectedItem();
-        String descripcion = jtaDescripcion.getText();
-        importe = Double.parseDouble(jtImporte.getText());
-        boolean activo = jrbActivo.isSelected();
-        boolean inactivo = jrbInactivo.isSelected();
-
-        tratamiento = tratData.buscarTratamiento(codigo);
-
-        if (activo && tratamiento == null) {
-            tratData.agregarTratamiento(new Tratamiento(tipos, descripcion, importe, activo));
-            jtCodigo.setText("");
-            jcbTipo.setSelectedItem(null);
-            jtImporte.setText("");
-            jtaDescripcion.setText("");
-            jrbTarjeta.setSelected(false);
-            jrbActivo.setSelected(false);
-            jrbInactivo.setSelected(false);
-        } else if (inactivo && tratamiento == null) {
-            tratData.agregarTratamiento(new Tratamiento(tipos, descripcion, importe, inactivo));
-            jtCodigo.setText("");
-            jcbTipo.setSelectedItem(null);
-            jtImporte.setText("");
-            jtaDescripcion.setText("");
-            jrbTarjeta.setSelected(false);
-            jrbActivo.setSelected(false);
-            jrbInactivo.setSelected(false);
         }
 
 //        if (tratamiento != null) {
@@ -426,21 +392,16 @@ public class AgregarTratamiento extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jrbEfectivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbEfectivoActionPerformed
-
+        importe = Double.parseDouble(jtImporte.getText());
         if (jrbEfectivo.isSelected() && tratamiento != null) {
             jrbTarjeta.setSelected(false);
             importe = tratData.importeContado(tratamiento);
             jtImporte.setText(importe + "");
         } else if (jrbEfectivo.isSelected() && tratamiento == null) {
-
-            if (tf) {
-                importe = Double.parseDouble(jtImporte.getText());
-                double descuento = (10 * importe) / 100;
-                double importeTotal = importe - descuento;
-                jtImporte.setText(importeTotal + "");
-                tf = false;
-            }
-
+            jrbTarjeta.setSelected(false);
+            double descuento = (10 * importe) / 100;
+            double importeTotal = importe - descuento;
+            jtImporte.setText(importeTotal + "");
         }
 
 
@@ -456,6 +417,87 @@ public class AgregarTratamiento extends javax.swing.JInternalFrame {
         this.dispose();
     }//GEN-LAST:event_jbSalirActionPerformed
 
+    private void jtImporteFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtImporteFocusLost
+        try {
+            importe2 = Double.parseDouble(jtImporte.getText());
+        } catch (NumberFormatException e) {
+
+        }
+
+
+    }//GEN-LAST:event_jtImporteFocusLost
+
+    private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
+        jtCodigo.setText("");
+        jcbTipo.setSelectedItem(null);
+        jtImporte.setText("");
+        jtaDescripcion.setText("");
+        jrbTarjeta.setSelected(true);
+        jrbEfectivo.setSelected(false);
+        jrbActivo.setSelected(false);
+        jrbInactivo.setSelected(false);
+        
+        
+//                try {
+//            int codigo = Integer.parseInt(jtCodigo.getText());
+//
+//            tratamiento = tratData.buscarTratamiento(codigo);
+//
+//            if (tratamiento != null) {
+//                int op = JOptionPane.showConfirmDialog(this, "Tramiento encontrado. Desea cargarlo?");
+//                if (op == 0) {
+//                    jcbTipo.setSelectedItem(tratamiento.getTipo());
+//
+//                    jtaDescripcion.setText(tratamiento.getDescripcion());
+//                    jtImporte.setText(tratamiento.getImporte() + "");
+//                    jtImporte.setEditable(false);
+//                    jrbTarjeta.setSelected(true);
+//                    if (tratamiento.isEstado()) {
+//                        jrbActivo.setSelected(true);
+//                    } else {
+//                        jrbInactivo.setSelected(true);
+//                    }
+//                } else {
+//
+//                    jtCodigo.setText("");
+//                    jcbTipo.setSelectedItem(null);
+//                    jtImporte.setText("");
+//                    jtaDescripcion.setText("");
+//                    jrbTarjeta.setSelected(false);
+//                    jrbActivo.setSelected(false);
+//                    jrbInactivo.setSelected(false);
+//
+//                }
+//            } else {
+//                jtImporte.setEditable(true);
+//            }
+//        } catch (NumberFormatException e) {
+//            JOptionPane.showMessageDialog(this, "Ingrese un numero");
+//        }
+        
+    }//GEN-LAST:event_jbNuevoActionPerformed
+
+    private void jtCodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtCodigoKeyTyped
+        char c = evt.getKeyChar();
+
+        if (!Character.isDigit(c)) {//si el caracter no es un numero
+            evt.consume();          //no permite escribir
+        }
+    }//GEN-LAST:event_jtCodigoKeyTyped
+
+    private void jtaDescripcionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtaDescripcionKeyTyped
+
+
+    }//GEN-LAST:event_jtaDescripcionKeyTyped
+
+    private void jtImporteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtImporteKeyTyped
+        char c = evt.getKeyChar();
+
+        if (!Character.isDigit(c)) {
+            evt.consume();          
+        }
+    }//GEN-LAST:event_jtImporteKeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -467,8 +509,6 @@ public class AgregarTratamiento extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton jbBuscar;
-    private javax.swing.JButton jbEliminar;
     private javax.swing.JButton jbGuardar;
     private javax.swing.JButton jbNuevo;
     private javax.swing.JButton jbSalir;
