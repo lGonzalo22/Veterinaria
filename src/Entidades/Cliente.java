@@ -101,6 +101,6 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return idCliente + ", " + documento + ", " + cabezaDeFamilia;
+        return documento + ", " + cabezaDeFamilia;
     }
 }

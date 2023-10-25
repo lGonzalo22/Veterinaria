@@ -5,7 +5,11 @@
  */
 package Vistas;
 
+import AccesoADatos.TratamientoData;
 import Entidades.TiposTratamientos;
+import Entidades.Tratamiento;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -13,11 +17,20 @@ import Entidades.TiposTratamientos;
  */
 public class ListadoTratamientosPorTipo extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form ListadoTratamientosPorTipo
-     */
+    private TratamientoData tratData = new TratamientoData();
+
+    private DefaultTableModel modelo = new DefaultTableModel() {
+
+        public boolean isCellEditable(int fila, int columna) {
+            return false;
+        }
+    };
+
     public ListadoTratamientosPorTipo() {
         initComponents();
+        cargarCombo();
+        armarTabla();
+        jtaDescripcion.setEditable(false);
     }
 
     /**
@@ -57,6 +70,11 @@ public class ListadoTratamientosPorTipo extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jtTabla.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtTablaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtTabla);
 
         jtaDescripcion.setColumns(20);
@@ -70,10 +88,21 @@ public class ListadoTratamientosPorTipo extends javax.swing.JInternalFrame {
 
         jbSalir.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jbSalir.setText("Salir");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Seleccione un tratamiento:");
+
+        jcbTipoTratamiento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbTipoTratamientoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -115,9 +144,7 @@ public class ListadoTratamientosPorTipo extends javax.swing.JInternalFrame {
                 .addComponent(jLabel2)
                 .addGap(17, 17, 17)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(jLabel5))
+                    .addComponent(jLabel5)
                     .addComponent(jcbTipoTratamiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4)
@@ -144,6 +171,40 @@ public class ListadoTratamientosPorTipo extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jbSalirActionPerformed
+
+    private void jcbTipoTratamientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbTipoTratamientoActionPerformed
+
+        TiposTratamientos tipoTratamiento = (TiposTratamientos) jcbTipoTratamiento.getSelectedItem();
+
+        modelo.setRowCount(0);
+        for (Tratamiento trat : tratData.listarTratamientoPorTipo(tipoTratamiento)) {
+            modelo.addRow(new Object[]{trat.getIdTratamiento(), trat.getTipo(), trat.getImporte()});
+        }
+        jtaDescripcion.setText("");
+
+    }//GEN-LAST:event_jcbTipoTratamientoActionPerformed
+
+    private void jtTablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtTablaMouseClicked
+
+        int fila = jtTabla.getSelectedRow();
+
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(this, "ERROR: Seleccione una fila");
+
+        } else {
+
+            int idTratamiento = (Integer) modelo.getValueAt(fila, 0);
+            Tratamiento tratamiento = tratData.buscarTratamiento(idTratamiento);
+
+            jtaDescripcion.setText(tratamiento.getDescripcion());
+        }
+
+
+    }//GEN-LAST:event_jtTablaMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel2;
@@ -157,4 +218,27 @@ public class ListadoTratamientosPorTipo extends javax.swing.JInternalFrame {
     private javax.swing.JTable jtTabla;
     private javax.swing.JTextArea jtaDescripcion;
     // End of variables declaration//GEN-END:variables
+
+    public void cargarCombo() {
+
+        jcbTipoTratamiento.addItem(null);
+        jcbTipoTratamiento.addItem(TiposTratamientos.BAÑOYCORTE);
+        jcbTipoTratamiento.addItem(TiposTratamientos.CIRUGIA);
+        jcbTipoTratamiento.addItem(TiposTratamientos.CONTROL);
+        jcbTipoTratamiento.addItem(TiposTratamientos.CURACIONES);
+        jcbTipoTratamiento.addItem(TiposTratamientos.ENFERMEDAD);
+        jcbTipoTratamiento.addItem(TiposTratamientos.MEDICACION);
+        jcbTipoTratamiento.addItem(TiposTratamientos.URGENCIA);
+        jcbTipoTratamiento.addItem(TiposTratamientos.VACUNACION);
+
+    }
+
+    public void armarTabla() {
+
+        modelo.addColumn("ID");
+        modelo.addColumn("Tratamiento");
+        modelo.addColumn("Importe");
+        jtTabla.setModel(modelo);
+
+    }
 }

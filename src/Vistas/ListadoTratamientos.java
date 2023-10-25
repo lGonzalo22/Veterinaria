@@ -51,7 +51,6 @@ public class ListadoTratamientos extends javax.swing.JInternalFrame {
         jtaDescripcion = new javax.swing.JTextArea();
         jLabel4 = new javax.swing.JLabel();
         jbActivar = new javax.swing.JButton();
-        jbModificar = new javax.swing.JButton();
         jtbModificar = new javax.swing.JToggleButton();
 
         setResizable(true);
@@ -133,14 +132,6 @@ public class ListadoTratamientos extends javax.swing.JInternalFrame {
             }
         });
 
-        jbModificar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jbModificar.setText("Modificar");
-        jbModificar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbModificarActionPerformed(evt);
-            }
-        });
-
         jtbModificar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jtbModificar.setText("Modificar");
         jtbModificar.addActionListener(new java.awt.event.ActionListener() {
@@ -181,18 +172,14 @@ public class ListadoTratamientos extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
-                .addGap(18, 18, 18)
-                .addComponent(jbModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
+                .addGap(147, 147, 147))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jbModificar))
-                .addGap(21, 21, 21)
+                .addComponent(jLabel2)
+                .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jrbActivos)
@@ -318,29 +305,27 @@ public class ListadoTratamientos extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jbEliminarActionPerformed
 
-    private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
-
-
-    }//GEN-LAST:event_jbModificarActionPerformed
-
     private void jtbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtbModificarActionPerformed
-        if (jtbModificar.isSelected()) {
+        int fila = jtTabla.getSelectedRow();
+        if (jtbModificar.isSelected() && fila != -1) {
             JOptionPane.showMessageDialog(this, "Puede modificar la descripcion.");
             jtaDescripcion.setEditable(true);
             jbEliminar.setEnabled(false);
             jbActivar.setEnabled(false);
-            jtbModificar.setName("Terminar");
+            jtbModificar.setText("Finalizar");
         } else {
-            int fila = jtTabla.getSelectedRow();
+            
             if (fila == -1) {
                 JOptionPane.showMessageDialog(this, "ERROR: Seleccione una fila");
             } else {
                 int idTratamiento = (Integer) modelo.getValueAt(fila, 0);
                 tratData.modificarDescripcionTratamiento(idTratamiento, jtaDescripcion.getText());
+                jtaDescripcion.setEditable(false);
+                jtbModificar.setText("Modificar");
                 if (jrbActivos.isSelected()) {
-                    jbActivar.setEnabled(true);
+                    jbEliminar.setEnabled(true);     
                 }else{
-                    jbEliminar.setEnabled(true);
+                    jbActivar.setEnabled(true);
                 }
                 
                 
@@ -360,7 +345,6 @@ public class ListadoTratamientos extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton jbActivar;
     private javax.swing.JButton jbEliminar;
-    private javax.swing.JButton jbModificar;
     private javax.swing.JButton jbSalir;
     private javax.swing.JRadioButton jrbActivos;
     private javax.swing.JRadioButton jrbInactivos;

@@ -120,6 +120,11 @@ public class Menu extends javax.swing.JFrame {
         jMenu5.add(jMenuItem8);
 
         jMenuItem11.setText("Tratamientos por tipo");
+        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem11ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem11);
 
         jMenuBar1.add(jMenu5);
@@ -127,6 +132,11 @@ public class Menu extends javax.swing.JFrame {
         jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Imagenes/clinica (1).png"))); // NOI18N
 
         jMenuItem4.setText("Agregar Visita");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem4);
 
         jMenuItem9.setText("Visita por mascota");
@@ -228,9 +238,29 @@ public class Menu extends javax.swing.JFrame {
         escritorio.moveToFront(tratamiento);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
+         escritorio.removeAll();
+        escritorio.repaint();
+        
+        ListadoTratamientosPorTipo tratamiento = new ListadoTratamientosPorTipo();
+        
+        tratamiento.setVisible(true);
+        escritorio.add(tratamiento);
+        escritorio.moveToFront(tratamiento);
+    }//GEN-LAST:event_jMenuItem11ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+ escritorio.removeAll();
+        escritorio.repaint();
+        
+        AgregarVisita visita = new AgregarVisita();
+        
+        visita.setVisible(true);
+        escritorio.add(visita);
+        escritorio.moveToFront(visita);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
