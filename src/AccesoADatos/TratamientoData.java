@@ -153,6 +153,31 @@ public class TratamientoData {
         return trat;
     }
     
+        public Tratamiento buscarTratamientoSinCartel(int id){
+        
+        Tratamiento trat = null;
+        
+        String sql = "SELECT * FROM tratamiento WHERE idTratamiento = ?";
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                trat = new Tratamiento();
+                trat.setIdTratamiento(id);
+                trat.setTipo(TiposTratamientos.valueOf(rs.getString("tipo")));
+                trat.setDescripcion(rs.getString("descripcion"));
+                trat.setImporte(rs.getDouble("importe"));
+                trat.setEstado(rs.getBoolean("activo"));
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
+        }
+        return trat;
+    }
+    
     public ArrayList<Tratamiento> listarTratamientoPorTipo(TiposTratamientos tipo){
         
         String sql = "SELECT * FROM tratamiento WHERE tipo = ?";

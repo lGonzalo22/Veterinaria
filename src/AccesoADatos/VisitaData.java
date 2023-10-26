@@ -87,7 +87,7 @@ public class VisitaData {
             PreparedStatement ps2 = con.prepareStatement(sql2);
             int correcto = ps2.executeUpdate();
             if (correcto == 1) {
-                JOptionPane.showMessageDialog(null, "Peso medio modificado con exito.");
+                
             } else {
                 JOptionPane.showMessageDialog(null, "La mascota no existe.");
             }
@@ -115,7 +115,30 @@ public class VisitaData {
                 visita.setFechaVisita(rs.getDate("fechaVisita").toLocalDate());
                 visita.setPesoActual(rs.getDouble("pesoActual"));
             } else {
-                JOptionPane.showMessageDialog(null, "ERROR: La visita no existe.");
+                JOptionPane.showMessageDialog(null, "La visita no existe.");
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
+        }
+        return visita;
+    }
+
+    public Visita buscarVisitaPorIdSinCartel(int id) {
+        Visita visita = null;
+        String sql = "SELECT * FROM visita WHERE idVisita = " + id;
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                visita = new Visita();
+                visita.setIdVisita(id);
+                visita.setCliente(clienData.buscarClientePorId(rs.getInt("idCliente")));
+                visita.setMascota(mascData.buscarMascota(rs.getInt("idMascota")));
+                visita.setTratamiento(tratData.buscarTratamiento(rs.getInt("idTratamiento")));
+                visita.setFechaVisita(rs.getDate("fechaVisita").toLocalDate());
+                visita.setPesoActual(rs.getDouble("pesoActual"));
             }
             ps.close();
         } catch (SQLException ex) {

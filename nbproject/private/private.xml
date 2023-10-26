@@ -14,11 +14,15 @@
         <group>
             <file>file:/C:/Users/gonza/OneDrive/Documentos/NetBeansProjects/Veterinaria/src/AccesoADatos/ClienteData.java</file>
             <file>file:/C:/Users/gonza/OneDrive/Documentos/NetBeansProjects/Veterinaria/src/AccesoADatos/TratamientoData.java</file>
+            <file>file:/C:/Users/gonza/OneDrive/Documentos/NetBeansProjects/Veterinaria/src/Vistas/AgregarMascota.java</file>
+            <file>file:/C:/Users/gonza/OneDrive/Documentos/NetBeansProjects/Veterinaria/src/Vistas/AgregarVisita.java</file>
             <file>file:/C:/Users/gonza/OneDrive/Documentos/NetBeansProjects/Veterinaria/src/Vistas/Menu.java</file>
             <file>file:/C:/Users/gonza/OneDrive/Documentos/NetBeansProjects/Veterinaria/src/Vistas/ListadoTratamientosPorTipo.java</file>
             <file>file:/C:/Users/gonza/OneDrive/Documentos/NetBeansProjects/Veterinaria/src/AccesoADatos/VisitaData.java</file>
+            <file>file:/C:/Users/gonza/OneDrive/Documentos/NetBeansProjects/Veterinaria/src/Vistas/ListadoVisitasPorTratamiento.java</file>
             <file>file:/C:/Users/gonza/OneDrive/Documentos/NetBeansProjects/Veterinaria/src/AccesoADatos/MascotaData.java</file>
             <file>file:/C:/Users/gonza/OneDrive/Documentos/NetBeansProjects/Veterinaria/src/Vistas/ListadoTratamientos.java</file>
+            <file>file:/C:/Users/gonza/OneDrive/Documentos/NetBeansProjects/Veterinaria/src/Vistas/ListadoVisitasPorMascota.java</file>
         </group>
     </open-files>
 </project-private>
