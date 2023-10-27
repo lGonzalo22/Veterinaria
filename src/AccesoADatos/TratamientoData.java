@@ -41,7 +41,7 @@ public class TratamientoData {
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "ERROR: Tratamientp" + ex.getMessage());
         }
     }
 

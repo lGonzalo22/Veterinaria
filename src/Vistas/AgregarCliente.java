@@ -334,7 +334,9 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+ 
         this.dispose();
+
     }//GEN-LAST:event_jbSalirActionPerformed
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
@@ -358,7 +360,7 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
 
             int documento = Integer.parseInt(jtDocumento.getText().trim());
             String apellidoYNombre = jtApellidoYNombre.getText();
-            String direccion = jtDireccion.getText();    
+            String direccion = jtDireccion.getText();
             long telefono = Long.parseLong(jtTelefono.getText().trim()); // .trim() = Eliminar espacios en blanco antes y después
             String personaAlternativa = jtPersonaAlternativa.getText();
             long telefonoAlternativo = Long.parseLong(jtTelefonoAlternativo.getText().trim());

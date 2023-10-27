@@ -414,8 +414,17 @@ public class AgregarMascota extends javax.swing.JInternalFrame {
         mascota = mascData.buscarMascota(codigo);
         
         // Define un patrón de formato para mostrar un dígito después de la coma
-        DecimalFormat df = new DecimalFormat("#0.0");
-        DecimalFormatSymbols dfs = new DecimalFormatSymbols();
+        
+        
+//                DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+//        symbols.setDecimalSeparator('.'); // Establece el punto como separador decimal
+//        DecimalFormat df = new DecimalFormat("#0.0", symbols);
+//
+//        // Formatea el número double
+//        String formattedNumber = df.format(number);
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+        symbols.setDecimalSeparator('.');
+        DecimalFormat df = new DecimalFormat("#0.0", symbols);
         // Formatea el número double
         String formattedNumber = df.format(mascota.getPesoMedio());
         

@@ -5,7 +5,15 @@
  */
 package Vistas;
 
+import AccesoADatos.MascotaData;
+import AccesoADatos.TratamientoData;
+import AccesoADatos.VisitaData;
+import Entidades.Mascota;
 import Entidades.TiposTratamientos;
+import Entidades.Visita;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -13,11 +21,20 @@ import Entidades.TiposTratamientos;
  */
 public class ListadoVisitasPorTratamiento extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form ListadoVisitasPorTratamiento
-     */
+    private VisitaData visData = new VisitaData();
+    private TratamientoData tratData = new TratamientoData();
+
+    private DefaultTableModel modelo = new DefaultTableModel() {
+
+        public boolean isCellEditable(int fila, int columna) {
+            return false;
+        }
+    };
+
     public ListadoVisitasPorTratamiento() {
         initComponents();
+        armarTabla();
+        cargarCombo();
     }
 
     /**
@@ -47,6 +64,12 @@ public class ListadoVisitasPorTratamiento extends javax.swing.JInternalFrame {
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Seleccione un tratamiento:");
 
+        jcbTipoTratamiento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbTipoTratamientoActionPerformed(evt);
+            }
+        });
+
         jtTabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -62,6 +85,11 @@ public class ListadoVisitasPorTratamiento extends javax.swing.JInternalFrame {
 
         jbSalir.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jbSalir.setText("Salir");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -114,6 +142,23 @@ public class ListadoVisitasPorTratamiento extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jcbTipoTratamientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbTipoTratamientoActionPerformed
+
+        TiposTratamientos tipos = (TiposTratamientos) jcbTipoTratamiento.getSelectedItem();
+
+        ArrayList<Visita> visitas = visData.listarVisitasPorTipoTratamiento(tipos);
+        
+        modelo.setRowCount(0);
+        for (Visita visita : visitas) {
+            modelo.addRow(new Object[]{visita.getIdVisita(), visita.getMascota().getNombre(), visita.getCliente().getCabezaDeFamilia(), visita.getPesoActual(), visita.getFechaVisita()});
+
+        }
+    }//GEN-LAST:event_jcbTipoTratamientoActionPerformed
+
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jbSalirActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel2;
@@ -124,4 +169,33 @@ public class ListadoVisitasPorTratamiento extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<TiposTratamientos> jcbTipoTratamiento;
     private javax.swing.JTable jtTabla;
     // End of variables declaration//GEN-END:variables
+
+    public void armarTabla() {
+        modelo.addColumn("ID");
+        modelo.addColumn("Mascota");
+        modelo.addColumn("Cliente");
+        modelo.addColumn("Peso actual");
+        modelo.addColumn("Fecha Visita");
+        jtTabla.setModel(modelo);
+
+//    TableColumn column = jtTabla.getColumnModel().getColumn(0);
+//        column.setPreferredWidth(30);
+//        column = jtTabla.getColumnModel().getColumn(1);
+//        column.setPreferredWidth(90);
+//        column = jtTabla.getColumnModel().getColumn(2);
+//        column.setPreferredWidth(115);
+    }
+
+    public void cargarCombo() {
+        jcbTipoTratamiento.addItem(null);
+        jcbTipoTratamiento.addItem(TiposTratamientos.BAÑOYCORTE);
+        jcbTipoTratamiento.addItem(TiposTratamientos.CIRUGIA);
+        jcbTipoTratamiento.addItem(TiposTratamientos.CONTROL);
+        jcbTipoTratamiento.addItem(TiposTratamientos.CURACIONES);
+        jcbTipoTratamiento.addItem(TiposTratamientos.ENFERMEDAD);
+        jcbTipoTratamiento.addItem(TiposTratamientos.MEDICACION);
+        jcbTipoTratamiento.addItem(TiposTratamientos.URGENCIA);
+        jcbTipoTratamiento.addItem(TiposTratamientos.VACUNACION);
+
+    }
 }

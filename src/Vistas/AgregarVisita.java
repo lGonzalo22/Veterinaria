@@ -18,8 +18,11 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import javax.swing.JDesktopPane;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
 
 /**
  *
@@ -36,12 +39,15 @@ public class AgregarVisita extends javax.swing.JInternalFrame {
     private Tratamiento tratamiento = null;
     private double importe = 0;
     private double importe2 = 0;
+    private AgregarCliente cl = null;
+    private JDesktopPane esc = null;
 
     public AgregarVisita() {
         initComponents();
         cargarCombos();
         cargarCombo();
         jrbTarjeta.setSelected(true);
+        jbModificar.setEnabled(false);
 
     }
 
@@ -59,7 +65,7 @@ public class AgregarVisita extends javax.swing.JInternalFrame {
         jbNuevoCliente = new javax.swing.JButton();
         jbBuscar = new javax.swing.JButton();
         jcbMascota = new javax.swing.JComboBox<>();
-        jButton3 = new javax.swing.JButton();
+        jbNuevaMascota = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         fechaVisita = new com.toedter.calendar.JDateChooser();
         jbGuardar = new javax.swing.JButton();
@@ -86,6 +92,19 @@ public class AgregarVisita extends javax.swing.JInternalFrame {
         jrbInactivo = new javax.swing.JRadioButton();
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jPanel1FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jPanel1FocusLost(evt);
+            }
+        });
+        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel1MouseClicked(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
@@ -134,8 +153,13 @@ public class AgregarVisita extends javax.swing.JInternalFrame {
         jcbMascota.setBackground(new java.awt.Color(255, 255, 255));
         jcbMascota.setForeground(new java.awt.Color(0, 0, 0));
 
-        jButton3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jButton3.setText("Nueva Mascota");
+        jbNuevaMascota.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jbNuevaMascota.setText("Nueva Mascota");
+        jbNuevaMascota.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbNuevaMascotaActionPerformed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 0, 0));
@@ -303,15 +327,6 @@ public class AgregarVisita extends javax.swing.JInternalFrame {
                                     .addComponent(jtCodigoTratamiento)
                                     .addComponent(jcbTipo, 0, 212, Short.MAX_VALUE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(66, 66, 66)
-                                .addComponent(jbNuevo)
-                                .addGap(18, 18, 18)
-                                .addComponent(jbGuardar)
-                                .addGap(18, 18, 18)
-                                .addComponent(jbModificar)
-                                .addGap(18, 18, 18)
-                                .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addGap(18, 18, 18)
                                 .addComponent(jtPesoActual, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -342,10 +357,8 @@ public class AgregarVisita extends javax.swing.JInternalFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel8)
-                                    .addComponent(fechaVisita, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(fechaVisita, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(72, 72, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -363,7 +376,7 @@ public class AgregarVisita extends javax.swing.JInternalFrame {
                             .addComponent(jcbMascota, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jbNuevaMascota, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jbNuevoCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addGap(41, 41, 41)
@@ -371,17 +384,31 @@ public class AgregarVisita extends javax.swing.JInternalFrame {
                         .addGap(28, 28, 28))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(232, 232, 232))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addGap(160, 160, 160))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(206, 206, 206))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jbNuevo)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbGuardar)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbModificar)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(60, 60, 60))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
+                        .addGap(15, 15, 15)
                         .addComponent(jLabel2)
-                        .addGap(26, 26, 26)
+                        .addGap(29, 29, 29)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(jtCodigoVisita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -394,7 +421,7 @@ public class AgregarVisita extends javax.swing.JInternalFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(jcbMascota, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton3)))
+                            .addComponent(jbNuevaMascota)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(64, 64, 64)
                         .addComponent(jbBuscar)))
@@ -432,13 +459,13 @@ public class AgregarVisita extends javax.swing.JInternalFrame {
                     .addComponent(jLabel13)
                     .addComponent(jrbActivo)
                     .addComponent(jrbInactivo))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbSalir)
                     .addComponent(jbGuardar)
                     .addComponent(jbNuevo)
                     .addComponent(jbModificar))
-                .addGap(35, 35, 35))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -456,9 +483,44 @@ public class AgregarVisita extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
-        
-        
-        
+
+        int codigoVisita = Integer.parseInt(jtCodigoVisita.getText());
+        Cliente clien = (Cliente) jcbCliente.getSelectedItem();
+        Mascota masc = (Mascota) jcbMascota.getSelectedItem();
+        double pesoActual = Double.parseDouble(jtPesoActual.getText());
+        SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
+        String fecha = formato.format(fechaVisita.getDate());
+        LocalDate fechaLocal = LocalDate.parse(fecha, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+
+        int codigoTratamiento = Integer.parseInt(jtCodigoTratamiento.getText());
+        TiposTratamientos tipos = (TiposTratamientos) jcbTipo.getSelectedItem();
+        String descripcion = jtaDescripcion.getText();
+        importe = Double.parseDouble(jtImporte.getText());
+        boolean activo = jrbActivo.isSelected();
+        boolean inactivo = jrbInactivo.isSelected();
+        System.out.println(tipos);
+        if (visita != null) {
+            visita.setCliente(clien);
+            visita.setMascota(masc);
+            visita.setPesoActual(pesoActual);
+            visita.setFechaVisita(fechaLocal);
+
+            //tratamiento.setTipo(tipos.compareTo((TiposTratamientos) jcbTipo.getSelectedItem()));
+            tratamiento.setDescripcion(descripcion);
+            tratamiento.setImporte(importe);
+            if (activo) {
+                tratamiento.setEstado(true);
+            } else {
+                tratamiento.setEstado(false);
+            }
+            visita.setTratamiento(tratamiento);
+            visData.modificarVisita(visita);
+            tratData.modificarTratamiento(tratamiento);
+            jbGuardar.setEnabled(true);
+            jbModificar.setEnabled(false);
+        }
+
+
     }//GEN-LAST:event_jbModificarActionPerformed
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
@@ -482,7 +544,8 @@ public class AgregarVisita extends javax.swing.JInternalFrame {
                                 jcbMascota.setSelectedItem(mascota);
                             }
                         }
-
+                        jbGuardar.setEnabled(false);
+                        jbModificar.setEnabled(true);
                     } catch (NullPointerException e) {
 
                     }
@@ -681,20 +744,67 @@ public class AgregarVisita extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbNuevoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoClienteActionPerformed
-        
-        AgregarCliente cl = new AgregarCliente();
-//        JInternalFrame internalFrame1 = new JInternalFrame();
-//        internalFrame1.setSize(200, 200);
-//        desktopPane.add(internalFrame1);
-//        internalFrame1.setVisible(true);
+        esc = getDesktopPane();
+        esc.repaint();
+        cl = new AgregarCliente();
+
         cl.setVisible(true);
-        cl.moveToFront();
+        esc.add(cl);
+        esc.moveToFront(cl);
+        if (cl.isVisible()) {
+            jbNuevoCliente.setEnabled(false);
+            jbNuevaMascota.setEnabled(false);
+        }
+
+
     }//GEN-LAST:event_jbNuevoClienteActionPerformed
+
+    private void jbNuevaMascotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevaMascotaActionPerformed
+        JDesktopPane esc = getDesktopPane();
+
+        esc.repaint();
+        AgregarMascota masc = new AgregarMascota();
+
+        masc.setVisible(true);
+        esc.add(masc);
+        esc.moveToFront(masc);
+
+        if (masc.isVisible()) {
+            jbNuevoCliente.setEnabled(false);
+            jbNuevaMascota.setEnabled(false);
+        }
+
+    }//GEN-LAST:event_jbNuevaMascotaActionPerformed
+
+    private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
+
+        jbNuevoCliente.setEnabled(true);
+        jbNuevaMascota.setEnabled(true);
+        esc.remove(cl);
+        esc.repaint();
+//        AgregarVisita vis = new AgregarVisita();
+//        esc.moveToFront(vis);
+
+    }//GEN-LAST:event_jPanel1MouseClicked
+
+    private void jPanel1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPanel1FocusGained
+
+//        
+//        cl.addInternalFrameListener(new InternalFrameAdapter() {
+//            @Override
+//            public void internalFrameClosed(InternalFrameEvent e) {
+//                vis.toFront(); // Pone el foco en internalFrame2 al cerrar internalFrame1
+//            }
+//        });
+    }//GEN-LAST:event_jPanel1FocusGained
+
+    private void jPanel1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPanel1FocusLost
+
+    }//GEN-LAST:event_jPanel1FocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser fechaVisita;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -713,6 +823,7 @@ public class AgregarVisita extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbGuardar;
     private javax.swing.JButton jbModificar;
+    private javax.swing.JButton jbNuevaMascota;
     private javax.swing.JButton jbNuevo;
     private javax.swing.JButton jbNuevoCliente;
     private javax.swing.JButton jbSalir;

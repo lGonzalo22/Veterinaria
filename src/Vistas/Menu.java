@@ -140,9 +140,19 @@ public class Menu extends javax.swing.JFrame {
         jMenu4.add(jMenuItem4);
 
         jMenuItem9.setText("Visita por mascota");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem9);
 
         jMenuItem10.setText("Visita por tratamiento");
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem10);
 
         jMenuBar1.add(jMenu4);
@@ -164,102 +174,123 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        
+
         escritorio.removeAll();
         escritorio.repaint();
-        
+
         AgregarMascota mascota = new AgregarMascota();
-        
+
         mascota.setVisible(true);
         escritorio.add(mascota);
         escritorio.moveToFront(mascota);
-        
-        
+
+
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        
+
         escritorio.removeAll();
         escritorio.repaint();
-        
+
         AgregarCliente cliente = new AgregarCliente();
-        
+
         cliente.setVisible(true);
         escritorio.add(cliente);
         escritorio.moveToFront(cliente);
-        
+
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        
+
         escritorio.removeAll();
         escritorio.repaint();
-        
+
         ListadoClientes cliente = new ListadoClientes();
-        
+
         cliente.setVisible(true);
         escritorio.add(cliente);
         escritorio.moveToFront(cliente);
-        
+
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         escritorio.removeAll();
         escritorio.repaint();
-        
+
         ListadoMascotas mascota = new ListadoMascotas();
-        
+
         mascota.setVisible(true);
         escritorio.add(mascota);
         escritorio.moveToFront(mascota);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-        
-         escritorio.removeAll();
+
+        escritorio.removeAll();
         escritorio.repaint();
-        
+
         AgregarTratamiento tratamiento = new AgregarTratamiento();
-        
+
         tratamiento.setVisible(true);
         escritorio.add(tratamiento);
         escritorio.moveToFront(tratamiento);
-        
+
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-         escritorio.removeAll();
+        escritorio.removeAll();
         escritorio.repaint();
-        
+
         ListadoTratamientos tratamiento = new ListadoTratamientos();
-        
+
         tratamiento.setVisible(true);
         escritorio.add(tratamiento);
         escritorio.moveToFront(tratamiento);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
-         escritorio.removeAll();
+        escritorio.removeAll();
         escritorio.repaint();
-        
+
         ListadoTratamientosPorTipo tratamiento = new ListadoTratamientosPorTipo();
-        
+
         tratamiento.setVisible(true);
         escritorio.add(tratamiento);
         escritorio.moveToFront(tratamiento);
     }//GEN-LAST:event_jMenuItem11ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
- escritorio.removeAll();
+        escritorio.removeAll();
         escritorio.repaint();
-        
+
         AgregarVisita visita = new AgregarVisita();
-        
+
         visita.setVisible(true);
         escritorio.add(visita);
         escritorio.moveToFront(visita);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+
+        ListadoVisitasPorMascota visita = new ListadoVisitasPorMascota();
+
+        visita.setVisible(true);
+        escritorio.add(visita);
+        escritorio.moveToFront(visita);
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+
+        ListadoVisitasPorTratamiento visita = new ListadoVisitasPorTratamiento();
+
+        visita.setVisible(true);
+        escritorio.add(visita);
+        escritorio.moveToFront(visita);
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

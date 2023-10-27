@@ -50,7 +50,7 @@ public class VisitaData {
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "ERROR: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "ERROR: Agregar Visita" + ex.getMessage());
         }
     }
 
