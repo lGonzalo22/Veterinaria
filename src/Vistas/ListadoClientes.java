@@ -20,7 +20,7 @@ public class ListadoClientes extends javax.swing.JInternalFrame {
 
     public DefaultTableModel modelo = new DefaultTableModel() {
 
-        public boolean filasColumnas(int filas, int columnas) {
+        public boolean isCellEditable(int filas, int columnas) {
             return false;
         }
     };

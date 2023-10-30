@@ -19,10 +19,9 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JDesktopPane;
-import javax.swing.JInternalFrame;
+
 import javax.swing.JOptionPane;
-import javax.swing.event.InternalFrameAdapter;
-import javax.swing.event.InternalFrameEvent;
+
 
 /**
  *
@@ -124,6 +123,11 @@ public class AgregarVisita extends javax.swing.JInternalFrame {
 
         jtCodigoVisita.setBackground(new java.awt.Color(255, 255, 255));
         jtCodigoVisita.setForeground(new java.awt.Color(0, 0, 0));
+        jtCodigoVisita.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtCodigoVisitaKeyTyped(evt);
+            }
+        });
 
         jcbCliente.setBackground(new java.awt.Color(255, 255, 255));
         jcbCliente.setForeground(new java.awt.Color(0, 0, 0));
@@ -203,6 +207,11 @@ public class AgregarVisita extends javax.swing.JInternalFrame {
 
         jtPesoActual.setBackground(new java.awt.Color(255, 255, 255));
         jtPesoActual.setForeground(new java.awt.Color(0, 0, 0));
+        jtPesoActual.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtPesoActualKeyTyped(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 0, 0));
@@ -484,7 +493,6 @@ public class AgregarVisita extends javax.swing.JInternalFrame {
 
     private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
 
-        int codigoVisita = Integer.parseInt(jtCodigoVisita.getText());
         Cliente clien = (Cliente) jcbCliente.getSelectedItem();
         Mascota masc = (Mascota) jcbMascota.getSelectedItem();
         double pesoActual = Double.parseDouble(jtPesoActual.getText());
@@ -492,20 +500,20 @@ public class AgregarVisita extends javax.swing.JInternalFrame {
         String fecha = formato.format(fechaVisita.getDate());
         LocalDate fechaLocal = LocalDate.parse(fecha, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
 
-        int codigoTratamiento = Integer.parseInt(jtCodigoTratamiento.getText());
+        tratamiento = tratData.buscarTratamientoSinCartel(visita.getTratamiento().getIdTratamiento());
+
         TiposTratamientos tipos = (TiposTratamientos) jcbTipo.getSelectedItem();
         String descripcion = jtaDescripcion.getText();
         importe = Double.parseDouble(jtImporte.getText());
         boolean activo = jrbActivo.isSelected();
-        boolean inactivo = jrbInactivo.isSelected();
-        System.out.println(tipos);
+
         if (visita != null) {
             visita.setCliente(clien);
             visita.setMascota(masc);
             visita.setPesoActual(pesoActual);
             visita.setFechaVisita(fechaLocal);
 
-            //tratamiento.setTipo(tipos.compareTo((TiposTratamientos) jcbTipo.getSelectedItem()));
+            tratamiento.setTipo(tipos);
             tratamiento.setDescripcion(descripcion);
             tratamiento.setImporte(importe);
             if (activo) {
@@ -514,11 +522,23 @@ public class AgregarVisita extends javax.swing.JInternalFrame {
                 tratamiento.setEstado(false);
             }
             visita.setTratamiento(tratamiento);
-            visData.modificarVisita(visita);
-            tratData.modificarTratamiento(tratamiento);
-            jbGuardar.setEnabled(true);
-            jbModificar.setEnabled(false);
+
         }
+        visData.modificarVisita(visita);
+        tratData.modificarTratamiento(tratamiento);
+        jbGuardar.setEnabled(true);
+        jbModificar.setEnabled(false);
+        jtCodigoVisita.setText("");
+        jcbCliente.setSelectedItem(null);
+        jcbMascota.setSelectedItem(null);
+        jtPesoActual.setText("");
+        fechaVisita.setDate(null);
+        jtCodigoTratamiento.setText("");
+        jcbTipo.setSelectedItem(null);
+        jtaDescripcion.setText("");
+        jtImporte.setText("");
+        jrbActivo.setSelected(false);
+        jrbInactivo.setSelected(false);
 
 
     }//GEN-LAST:event_jbModificarActionPerformed
@@ -526,9 +546,9 @@ public class AgregarVisita extends javax.swing.JInternalFrame {
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         try {
 
-            int codigo = Integer.parseInt(jtCodigoVisita.getText());
+            int codigoVisita = Integer.parseInt(jtCodigoVisita.getText());
 
-            visita = visData.buscarVisitaPorId(codigo);
+            visita = visData.buscarVisitaPorId(codigoVisita);
 
             if (visita != null) {
                 int op = JOptionPane.showConfirmDialog(this, "La visita ya existe. Desea cargarla?");
@@ -582,12 +602,12 @@ public class AgregarVisita extends javax.swing.JInternalFrame {
     private void jcbClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbClienteActionPerformed
         try {
             jcbMascota.removeAllItems();
+
             cliente = (Cliente) jcbCliente.getSelectedItem();
             jcbMascota.addItem(null);
             for (Mascota mascota : mascData.listarMascotaPorCliente(cliente.getIdCliente())) {
                 jcbMascota.addItem(mascota);
             }
-
         } catch (NullPointerException e) {
 
         }
@@ -616,8 +636,10 @@ public class AgregarVisita extends javax.swing.JInternalFrame {
 
     private void jtImporteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtImporteKeyTyped
         char c = evt.getKeyChar();
-
-        if (!Character.isDigit(c)) {
+        if (c == ',') {
+            evt.setKeyChar('.'); // Reemplaza la coma por un punto
+        }
+        if (!Character.isDigit(c) && c == '.') {
             evt.consume();
         }
     }//GEN-LAST:event_jtImporteKeyTyped
@@ -717,8 +739,8 @@ public class AgregarVisita extends javax.swing.JInternalFrame {
                 jcbTipo.setSelectedItem(null);
                 jtaDescripcion.setText("");
                 jtImporte.setText("");
-                jrbEfectivo.setEnabled(false);
-                jrbTarjeta.setEnabled(true);
+                jrbEfectivo.setSelected(false);
+                jrbTarjeta.setSelected(true);
                 jrbActivo.setSelected(false);
                 jrbInactivo.setSelected(false);
             } else {
@@ -782,6 +804,8 @@ public class AgregarVisita extends javax.swing.JInternalFrame {
         jbNuevaMascota.setEnabled(true);
         esc.remove(cl);
         esc.repaint();
+        cargarCombos();
+        
 //        AgregarVisita vis = new AgregarVisita();
 //        esc.moveToFront(vis);
 
@@ -801,6 +825,26 @@ public class AgregarVisita extends javax.swing.JInternalFrame {
     private void jPanel1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPanel1FocusLost
 
     }//GEN-LAST:event_jPanel1FocusLost
+
+    private void jtCodigoVisitaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtCodigoVisitaKeyTyped
+
+        char c = evt.getKeyChar();
+
+        if (!Character.isDigit(c)) {//si el caracter no es un numero
+            evt.consume();          //no permite escribir
+        }
+
+    }//GEN-LAST:event_jtCodigoVisitaKeyTyped
+
+    private void jtPesoActualKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtPesoActualKeyTyped
+        char c = evt.getKeyChar();
+        if (c == ',') {
+            evt.setKeyChar('.'); // Reemplaza la coma por un punto
+        }
+        if (!Character.isDigit(c) && c == '.') {//si el caracter no es un numero
+            evt.consume();          //no permite escribir
+        }
+    }//GEN-LAST:event_jtPesoActualKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -842,10 +886,12 @@ public class AgregarVisita extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     public void cargarCombos() {
-
+        
+        jcbCliente.removeAllItems();
+        
         jcbCliente.addItem(null);
-        for (Cliente cliente : clienData.listarClientes()) {
-            jcbCliente.addItem(cliente);
+        for (Cliente clie : clienData.listarClientes()) {
+            jcbCliente.addItem(clie);
         }
 
     }

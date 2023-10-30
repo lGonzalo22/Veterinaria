@@ -407,15 +407,11 @@ public class AgregarMascota extends javax.swing.JInternalFrame {
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
 
-        
-        
         int codigo = Integer.parseInt(jtCodigo.getText());
 
         mascota = mascData.buscarMascota(codigo);
-        
+
         // Define un patrón de formato para mostrar un dígito después de la coma
-        
-        
 //                DecimalFormatSymbols symbols = new DecimalFormatSymbols();
 //        symbols.setDecimalSeparator('.'); // Establece el punto como separador decimal
 //        DecimalFormat df = new DecimalFormat("#0.0", symbols);
@@ -427,7 +423,7 @@ public class AgregarMascota extends javax.swing.JInternalFrame {
         DecimalFormat df = new DecimalFormat("#0.0", symbols);
         // Formatea el número double
         String formattedNumber = df.format(mascota.getPesoMedio());
-        
+
         if (mascota != null) {
             int op = JOptionPane.showConfirmDialog(this, "Mascota encontrada. Desea cargarla?");
 
@@ -496,6 +492,7 @@ public class AgregarMascota extends javax.swing.JInternalFrame {
 
         jtCodigo.setText("");
         jtNombre.setText("");
+        jcbCliente.setSelectedItem(null);
         jrbMacho.setSelected(false);
         jrbHembra.setSelected(false);
         jtEspecie.setText("");
@@ -547,12 +544,64 @@ public class AgregarMascota extends javax.swing.JInternalFrame {
 
             if (macho && activo && mascota == null) {
                 mascData.agregarMascota(new Mascota(clien, nombre, sexoM, especie, raza, colorPelo, fechaLocal, pesoMedio, pesoActual, activo));
+                jtCodigo.setText("");
+                jcbCliente.setSelectedItem(null);
+                jtNombre.setText("");
+                jrbMacho.setSelected(false);
+                jrbHembra.setSelected(false);
+                jtEspecie.setText("");
+                jtRaza.setText("");
+                jtColorPelo.setText("");
+                fechaNacimiento.setDate(null);
+                jtPesoMedio.setText("");
+                jtPesoActual.setText("");
+                jrbActivo.setSelected(false);
+                jrbInactivos.setSelected(false);
             } else if (macho && inactivo && mascota == null) {
                 mascData.agregarMascota(new Mascota(clien, nombre, sexoM, especie, raza, colorPelo, fechaLocal, pesoMedio, pesoActual, inactivo));
+                jtCodigo.setText("");
+                jcbCliente.setSelectedItem(null);
+                jtNombre.setText("");
+                jrbMacho.setSelected(false);
+                jrbHembra.setSelected(false);
+                jtEspecie.setText("");
+                jtRaza.setText("");
+                jtColorPelo.setText("");
+                fechaNacimiento.setDate(null);
+                jtPesoMedio.setText("");
+                jtPesoActual.setText("");
+                jrbActivo.setSelected(false);
+                jrbInactivos.setSelected(false);
             } else if (hembra && activo && mascota == null) {
                 mascData.agregarMascota(new Mascota(clien, nombre, sexoF, especie, raza, colorPelo, fechaLocal, pesoMedio, pesoActual, activo));
+                jtCodigo.setText("");
+                jcbCliente.setSelectedItem(null);
+                jtNombre.setText("");
+                jrbMacho.setSelected(false);
+                jrbHembra.setSelected(false);
+                jtEspecie.setText("");
+                jtRaza.setText("");
+                jtColorPelo.setText("");
+                fechaNacimiento.setDate(null);
+                jtPesoMedio.setText("");
+                jtPesoActual.setText("");
+                jrbActivo.setSelected(false);
+                jrbInactivos.setSelected(false);
             } else if (hembra && inactivo && mascota == null) {
                 mascData.agregarMascota(new Mascota(clien, nombre, sexoF, especie, raza, colorPelo, fechaLocal, pesoMedio, pesoActual, inactivo));
+                jtCodigo.setText("");
+                jcbCliente.setSelectedItem(null);
+                jtNombre.setText("");
+                jrbMacho.setSelected(false);
+                jrbHembra.setSelected(false);
+                jtEspecie.setText("");
+                jtRaza.setText("");
+                jtColorPelo.setText("");
+                fechaNacimiento.setDate(null);
+                jtPesoMedio.setText("");
+                jtPesoActual.setText("");
+                jrbActivo.setSelected(false);
+                jrbInactivos.setSelected(false);
             }
 
             if (mascota != null) {
@@ -580,6 +629,7 @@ public class AgregarMascota extends javax.swing.JInternalFrame {
                     mascData.modificarMascota(mascota);
                     jtCodigo.setText("");
                     jtNombre.setText("");
+                    jcbCliente.setSelectedItem(null);
                     jrbMacho.setSelected(false);
                     jrbHembra.setSelected(false);
                     jtEspecie.setText("");
@@ -594,6 +644,7 @@ public class AgregarMascota extends javax.swing.JInternalFrame {
                 } else {
                     jtCodigo.setText("");
                     jtNombre.setText("");
+                    jcbCliente.setSelectedItem(null);
                     jrbMacho.setSelected(false);
                     jrbHembra.setSelected(false);
                     jtEspecie.setText("");
@@ -651,26 +702,14 @@ public class AgregarMascota extends javax.swing.JInternalFrame {
             jbEliminar.setEnabled(true);
         } else {
             jrbActivo.setSelected(true);
-            jtCodigo.setText("");
-            jtNombre.setText("");
-            jrbMacho.setSelected(false);
-            jrbHembra.setSelected(false);
-            jtEspecie.setText("");
-            jtRaza.setText("");
-            jtColorPelo.setText("");
-            fechaNacimiento.setDate(null);
-            jtPesoMedio.setText("");
-            jtPesoActual.setText("");
-            jrbActivo.setSelected(false);
-            jrbInactivos.setSelected(false);
+
         }
 
     }//GEN-LAST:event_jrbActivoActionPerformed
 
-    private void jrbInactivoActionPerformed(java.awt.event.ActionEvent evt) {                                            
+    private void jrbInactivoActionPerformed(java.awt.event.ActionEvent evt) {
 
-
-    }                                           
+    }
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
 

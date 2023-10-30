@@ -254,9 +254,10 @@ public class ListadoMascotas extends javax.swing.JInternalFrame {
             cliente = (Cliente) jcbCliente.getSelectedItem();
             modelo.setRowCount(0);
             for (Mascota mascota : mascData.listarMascotaPorCliente(cliente.getIdCliente())) {
-
-                modelo.addRow(new Object[]{mascota.getIdMascota(), mascota.getNombre(), mascota.getSexo(), mascota.getEspecie(), mascota.getRaza(), mascota.getColorPelo(), mascota.getFechaNac(), mascota.getPesoMedio(), mascota.getPesoActual(), mascota.isEstado()});
-
+                
+                if (mascota.isEstado()) {
+                    modelo.addRow(new Object[]{mascota.getIdMascota(), mascota.getNombre(), mascota.getSexo(), mascota.getEspecie(), mascota.getRaza(), mascota.getColorPelo(), mascota.getFechaNac(), mascota.getPesoMedio(), mascota.getPesoActual(), mascota.isEstado()});
+                }
             }
         } else if (jrbInactivos.isSelected()) {
             cliente = (Cliente) jcbCliente.getSelectedItem();
@@ -264,8 +265,9 @@ public class ListadoMascotas extends javax.swing.JInternalFrame {
             modelo.setRowCount(0);
             for (Mascota mascota : mascData.listarMascotaPorCliente(cliente.getIdCliente())) {
 
-                modelo.addRow(new Object[]{mascota.getIdMascota(), mascota.getNombre(), mascota.getSexo(), mascota.getEspecie(), mascota.getRaza(), mascota.getColorPelo(), mascota.getFechaNac(), mascota.getPesoMedio(), mascota.getPesoActual(), mascota.isEstado()});
-
+                if (!mascota.isEstado()) {
+                    modelo.addRow(new Object[]{mascota.getIdMascota(), mascota.getNombre(), mascota.getSexo(), mascota.getEspecie(), mascota.getRaza(), mascota.getColorPelo(), mascota.getFechaNac(), mascota.getPesoMedio(), mascota.getPesoActual(), mascota.isEstado()});
+                }
             }
 
         }
