@@ -22,7 +22,6 @@ import javax.swing.JDesktopPane;
 
 import javax.swing.JOptionPane;
 
-
 /**
  *
  * @author gonza
@@ -46,6 +45,7 @@ public class AgregarVisita extends javax.swing.JInternalFrame {
         cargarCombos();
         cargarCombo();
         jrbTarjeta.setSelected(true);
+        jrbEfectivo.setEnabled(false);
         jbModificar.setEnabled(false);
 
     }
@@ -269,6 +269,9 @@ public class AgregarVisita extends javax.swing.JInternalFrame {
             }
         });
         jtImporte.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtImporteKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtImporteKeyTyped(evt);
             }
@@ -799,27 +802,23 @@ public class AgregarVisita extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbNuevaMascotaActionPerformed
 
     private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
+        try {
 
-        jbNuevoCliente.setEnabled(true);
-        jbNuevaMascota.setEnabled(true);
-        esc.remove(cl);
-        esc.repaint();
-        cargarCombos();
-        
-//        AgregarVisita vis = new AgregarVisita();
-//        esc.moveToFront(vis);
+            jbNuevoCliente.setEnabled(true);
+            jbNuevaMascota.setEnabled(true);
+            esc.remove(cl);
+            esc.repaint();
+            cargarCombos();
+
+        } catch (NullPointerException e) {
+
+        }
+
 
     }//GEN-LAST:event_jPanel1MouseClicked
 
     private void jPanel1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPanel1FocusGained
 
-//        
-//        cl.addInternalFrameListener(new InternalFrameAdapter() {
-//            @Override
-//            public void internalFrameClosed(InternalFrameEvent e) {
-//                vis.toFront(); // Pone el foco en internalFrame2 al cerrar internalFrame1
-//            }
-//        });
     }//GEN-LAST:event_jPanel1FocusGained
 
     private void jPanel1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPanel1FocusLost
@@ -842,9 +841,17 @@ public class AgregarVisita extends javax.swing.JInternalFrame {
             evt.setKeyChar('.'); // Reemplaza la coma por un punto
         }
         if (!Character.isDigit(c) && c == '.') {//si el caracter no es un numero
-            evt.consume();          //no permite escribir
+            evt.consume();                      //no permite escribir
         }
     }//GEN-LAST:event_jtPesoActualKeyTyped
+
+    private void jtImporteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtImporteKeyPressed
+
+        if (!jtImporte.getText().isEmpty()) {
+            jrbEfectivo.setEnabled(true);
+        }
+
+    }//GEN-LAST:event_jtImporteKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -886,9 +893,9 @@ public class AgregarVisita extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     public void cargarCombos() {
-        
+
         jcbCliente.removeAllItems();
-        
+
         jcbCliente.addItem(null);
         for (Cliente clie : clienData.listarClientes()) {
             jcbCliente.addItem(clie);
