@@ -411,13 +411,6 @@ public class AgregarMascota extends javax.swing.JInternalFrame {
 
         mascota = mascData.buscarMascota(codigo);
 
-        // Define un patrón de formato para mostrar un dígito después de la coma
-//                DecimalFormatSymbols symbols = new DecimalFormatSymbols();
-//        symbols.setDecimalSeparator('.'); // Establece el punto como separador decimal
-//        DecimalFormat df = new DecimalFormat("#0.0", symbols);
-//
-//        // Formatea el número double
-//        String formattedNumber = df.format(number);
         DecimalFormatSymbols symbols = new DecimalFormatSymbols();
         symbols.setDecimalSeparator('.');
         DecimalFormat df = new DecimalFormat("#0.0", symbols);
@@ -428,7 +421,15 @@ public class AgregarMascota extends javax.swing.JInternalFrame {
             int op = JOptionPane.showConfirmDialog(this, "Mascota encontrada. Desea cargarla?");
 
             if (op == 0) {
-                jcbCliente.setSelectedIndex(mascota.getCliente().getIdCliente());
+                for (int i = 1; i <= jcbCliente.getMaximumRowCount(); i++) {
+
+                    Cliente cliente = (Cliente) jcbCliente.getItemAt(i);
+                    if (mascota.getCliente().getIdCliente() == cliente.getIdCliente()) {
+                        jcbCliente.setSelectedIndex(i);
+                        break;
+                    }
+                }
+
                 jtNombre.setText(mascota.getNombre());
                 if (mascota.getSexo().equals("macho")) {
                     jrbMacho.setSelected(true);
@@ -442,7 +443,6 @@ public class AgregarMascota extends javax.swing.JInternalFrame {
                 jtColorPelo.setText(mascota.getColorPelo());
                 fechaNacimiento.setDate(Date.valueOf(mascota.getFechaNac()));
                 jtPesoMedio.setText(formattedNumber);
-                //jtPesoMedio.setText(mascota.getPesoMedio() + "");
                 jtPesoActual.setText(mascota.getPesoActual() + "");
                 jrbActivo.setSelected(mascota.isEstado());
                 jrbInactivos.setSelected(!mascota.isEstado());
@@ -823,7 +823,10 @@ public class AgregarMascota extends javax.swing.JInternalFrame {
     public void cargarCombo() {
         jcbCliente.addItem(null);
         for (Cliente cliente : clienData.listarClientes()) {
-            jcbCliente.addItem(cliente);
+            if (cliente.isEstado()) {
+                jcbCliente.addItem(cliente);
+            }
+
         }
 
     }

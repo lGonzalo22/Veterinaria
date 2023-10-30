@@ -324,6 +324,13 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
                     jbEliminar.setEnabled(cliente.isEstado());
                 } else {
                     jtDocumento.setText("");
+                    jtApellidoYNombre.setText("");
+                    jtDireccion.setText("");
+                    jtTelefono.setText("");
+                    jtPersonaAlternativa.setText("");
+                    jtTelefonoAlternativo.setText("");
+                    jrbActivo.setSelected(false);
+                    jrbInactivo.setSelected(false);
                 }
             }
 
@@ -334,7 +341,7 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
- 
+
         this.dispose();
 
     }//GEN-LAST:event_jbSalirActionPerformed
@@ -370,7 +377,7 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
             cliente = clienData.buscarClientePorDni(documento);
 
             if (activo && cliente == null) {
-                clienData.agregarCliente(new Cliente(documento, apellidoYNombre, direccion, telefono, personaAlternativa, telefonoAlternativo, activo));
+                clienData.agregarCliente(new Cliente(documento, apellidoYNombre, direccion, telefono, personaAlternativa, telefonoAlternativo, true));
                 jtDocumento.setText("");
                 jtApellidoYNombre.setText("");
                 jtDireccion.setText("");
@@ -380,7 +387,7 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
                 jrbActivo.setSelected(false);
                 jrbInactivo.setSelected(false);
             } else if (inactivo && cliente == null) {
-                clienData.agregarCliente(new Cliente(documento, apellidoYNombre, direccion, telefono, personaAlternativa, telefonoAlternativo, inactivo));
+                clienData.agregarCliente(new Cliente(documento, apellidoYNombre, direccion, telefono, personaAlternativa, telefonoAlternativo, false));
                 jtDocumento.setText("");
                 jtApellidoYNombre.setText("");
                 jtDireccion.setText("");
@@ -456,16 +463,16 @@ public class AgregarCliente extends javax.swing.JInternalFrame {
     private void jtPersonaAlternativaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtPersonaAlternativaKeyTyped
         char c = evt.getKeyChar();
 
-        if (Character.isDigit(c)) {//si el caracter no es un numero
-            evt.consume();          //no permite escribir
+        if (Character.isDigit(c)) {
+            evt.consume();         
         }
     }//GEN-LAST:event_jtPersonaAlternativaKeyTyped
 
     private void jtTelefonoAlternativoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtTelefonoAlternativoKeyTyped
         char c = evt.getKeyChar();
 
-        if (!Character.isDigit(c)) {//si el caracter no es un numero
-            evt.consume();          //no permite escribir
+        if (!Character.isDigit(c)) {
+            evt.consume();          
         }
 
     }//GEN-LAST:event_jtTelefonoAlternativoKeyTyped

@@ -556,7 +556,16 @@ public class AgregarVisita extends javax.swing.JInternalFrame {
             if (visita != null) {
                 int op = JOptionPane.showConfirmDialog(this, "La visita ya existe. Desea cargarla?");
                 if (op == 0) {
-                    jcbCliente.setSelectedIndex(visita.getCliente().getIdCliente());
+                    for (int i = 1; i <= jcbCliente.getMaximumRowCount(); i++) {
+
+                        Cliente clien = (Cliente) jcbCliente.getItemAt(i);
+                        if (visita.getCliente().getIdCliente() == clien.getIdCliente()) {
+                            jcbCliente.setSelectedIndex(i);
+                            break;
+                        }
+                    }
+
+
                     try {
                         jcbMascota.removeAllItems();
                         cliente = (Cliente) jcbCliente.getSelectedItem();
@@ -609,7 +618,10 @@ public class AgregarVisita extends javax.swing.JInternalFrame {
             cliente = (Cliente) jcbCliente.getSelectedItem();
             jcbMascota.addItem(null);
             for (Mascota mascota : mascData.listarMascotaPorCliente(cliente.getIdCliente())) {
-                jcbMascota.addItem(mascota);
+                if (mascota.isEstado()) {
+                    jcbMascota.addItem(mascota);
+                }
+                
             }
         } catch (NullPointerException e) {
 
